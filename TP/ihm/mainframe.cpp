@@ -29,13 +29,14 @@ CMainFrame::CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& 
 	iEpaisseurTraitCourante= 1;
 	wCouleurCourante= wxBLACK;
 	num_tri= 0;	
-	opgcan=new OpenGLCanvas(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, wxT("OpenGLCANVAS"));
+	
 
 	
 } //constructor
 //----------------------------------------------------------------------
 void CMainFrame::CreateMyToolbar() 
 {
+	opgcan=new OpenGLCanvas(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, wxT("OpenGLCANVAS"));
 	//creation de la barre vide ( avec certaine propriete)
 	m_toolbar=CreateToolBar(wxNO_BORDER | wxTB_HORIZONTAL | wxTB_TEXT,TOOLBAR_TOOLS);
 	
