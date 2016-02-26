@@ -4,7 +4,7 @@
 #include "triangle.h"
 //----------------------------------------------------------------------
 BEGIN_EVENT_TABLE(OpenGLCanvas, wxGLCanvas)    
-	EVT_PAINT(OpenGLCanvas::OnPaint( wxPaintEvent& event);)
+	EVT_PAINT(OpenGLCanvas::OnPaint(wxPaintEvent& event)
     EVT_SIZE(OpenGLCanvas::OnSize)
     EVT_ERASE_BACKGROUND(OpenGLCanvas::OnEraseBackground)
 END_EVENT_TABLE()
