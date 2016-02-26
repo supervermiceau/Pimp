@@ -1,4 +1,3 @@
-
 #ifndef __MAINFRAME_H__
 #define __MAINFRAME_H__
 
@@ -13,7 +12,7 @@
 
 static wxString NameCol[] = {wxT("Triangle 0"), wxT("Triangle 1"), wxT("Triangle 2"), wxT("Triangle 3")};
 //----------------------------------------------------------------------
-class CMainFrame: public wxFrame 
+class CMainFrame: public wxFrame
 {
 public:
 	CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
