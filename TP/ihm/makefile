@@ -9,8 +9,10 @@ main.o : main.cpp
 dialogs.o : dialogs.cpp dialogs.h mainframe.h
 	$(CC) `wx-config --cxxflags` -c dialogs.cpp -o dialogs.o
 
-mainframe.o : mainframe.cpp
+mainframe.o : mainframe.cpp mainframe.h
 	$(CC) `wx-config --cxxflags` -c mainframe.cpp -o mainframe.o
+	
+openGLCanvas.o : openGLCanvas.cpp openGLCanvas.h
 
 clean : 
 	rm -f *.o drawtri 
