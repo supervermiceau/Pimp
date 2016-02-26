@@ -35,6 +35,7 @@ void OpenGLCanvas::OnSize( wxSizeEvent& event )
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnEraseBackground( wxEraseEvent& event )
 {
+	//ééé
 }
 //----------------------------------------------------------------------
 void OpenGLCanvas::Draw()

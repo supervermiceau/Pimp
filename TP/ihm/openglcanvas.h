@@ -17,5 +17,5 @@ class OpenGLCanvas : public wxGLCanvas
 	DECLARE_EVENT_TABLE();
     void Draw();
 };
-    
+    //ééé
 #endif //__OPENGLCANVAS_H__
