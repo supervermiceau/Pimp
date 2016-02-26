@@ -1,7 +1,5 @@
 #include "openGLCanvas.h"
-#include "mainframe.h"
-#include <wx/event.h>
-#include "triangle.h"
+
 //----------------------------------------------------------------------
 BEGIN_EVENT_TABLE(OpenGLCanvas, wxGLCanvas)
     EVT_PAINT(OpenGLCanvas::OnPaint)

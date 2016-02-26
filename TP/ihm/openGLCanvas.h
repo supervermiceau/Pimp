@@ -2,6 +2,7 @@
 #define __OPENGLCANVAS_H__
 #include <wx/glcanvas.h>
 #include <wx/dcclient.h>
+#include <wx/event.h>
 #include "wx/wx.h"
 //----------------------------------------------------------------------
 class OpenGLCanvas : public wxGLCanvas 
