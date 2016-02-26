@@ -19,18 +19,16 @@ OpenGLCanvas::~OpenGLCanvas(void)
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnPaint( wxPaintEvent& event )
 {
-	wxPaintDC dc(this);
-	SetCurrent();
+	wxPaintDC dc(this);
+	SetCurrent();
 	Draw();
-	SwapBuffers();
-}
+	SwapBuffers();
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnSize( wxSizeEvent& event )
-{	
-	wxGLCanvas::OnSize(event);
-
-	int w, h;
-	GetClientSize(&w, &h);
+{
+	wxGLCanvas::OnSize(event);
+	int w,h;
+	GetClientSize(&w, &h);
 }
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnEraseBackground( wxEraseEvent& event )
