@@ -13,7 +13,7 @@ mainframe.o : mainframe.cpp mainframe.h
 	$(CC) `wx-config --cxxflags` -c mainframe.cpp -o mainframe.o
 	
 openGLCanvas.o : openGLCanvas.cpp openGLCanvas.h
-	$(CC) `wx-config --cxxflags` -c openGLCanvas.cpp -o openGLCanvas.o
+	$(CC) `wx-config --cxxflags --gl-libs` -c openGLCanvas.cpp -o openGLCanvas.o
 clean : 
 	rm -f *.o drawtri 
 	
