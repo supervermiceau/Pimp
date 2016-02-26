@@ -38,14 +38,14 @@ void OpenGLCanvas::OnEraseBackground( wxEraseEvent& event )
 //----------------------------------------------------------------------
 void OpenGLCanvas::Draw()
 {
-	glMatrixMode( GL_PROJECTION );
-	glLoadIdentity();
-	int w, h;
-	GetClientSize(&w, &h);
-	glOrtho(­w/2., w/2., ­h/2., h/2., ­1., 3.);
-	glMatrixMode( GL_MODELVIEW );
-	glLoadIdentity();
-	glClearColor( .3f, .4f, .6f, 1 );
-	glClear( GL_COLOR_BUFFER_BIT);
+	glMatrixMode( GL_Projection);
+	glLoadIdentity();
+	int w, h;
+	GetClientSize(&w, &h);
+	glOrtho(w/2., w/2., h/2., h/2., 1., 3.);
+	glMatrixMode( GL_MODELVIEW);
+	glLoadIdentity();
+	glClearColor( .3f, .4f, .6f, 1);
+	glClear( GL_COLOR_BUFFER_BIT);
 }
 //----------------------------------------------------------------------
