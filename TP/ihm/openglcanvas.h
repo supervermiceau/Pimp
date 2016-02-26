@@ -12,7 +12,7 @@ class OpenGLCanvas : public wxGLCanvas
 
     private:
 	DECLARE_EVENT_TABLE();
-    void OnPaint( wxPaintEvent& event );
+    void OnPaint(wxPaintEvent& event);
     void OnSize( wxSizeEvent& event );
     void OnEraseBackground( wxEraseEvent& event );
     void Draw();
