@@ -7,7 +7,7 @@
 #include <string.h>
 #include "dialogs.h"
 #include "triangle.h"
-#include "openGLCanvas.h"
+#include "openglcanvas.h"
 
 //----------------------------------------------------------------------
 

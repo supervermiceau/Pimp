@@ -1,4 +1,4 @@
-#include "openGLCanvas.h"
+#include "openglcanvas.h"
 #include "mainframe.h"
 #include <wx/event.h>
 #include "triangle.h"
