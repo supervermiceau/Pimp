@@ -28,7 +28,10 @@ CMainFrame::CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& 
 	//initialisation des variables
 	iEpaisseurTraitCourante= 1;
 	wCouleurCourante= wxBLACK;
-	num_tri= 0;
+	num_tri= 0;	
+	opgcan=new OpenGLCanvas(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, wxT("OpenGLCANVAS"));
+
+	
 } //constructor
 //----------------------------------------------------------------------
 void CMainFrame::CreateMyToolbar() 

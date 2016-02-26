@@ -23,6 +23,7 @@ public:
 	bool bIsDrawing;
 	wxMenu *affichage;
 	wxFileDialog *filedialog;
+	OpenGLCanvas* opgcan;
 	void CreateMyToolbar();
 	void OnNew(wxCommandEvent& event); 
 	void OnOpen(wxCommandEvent& event);
