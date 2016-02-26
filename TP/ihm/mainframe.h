@@ -7,7 +7,8 @@
 #include <string.h>
 #include "dialogs.h"
 #include "triangle.h"
-#include "openglcanvas.h"
+#include "openGLCanvas.h"
+
 //----------------------------------------------------------------------
 
 static wxString NameCol[] = {wxT("Triangle 0"), wxT("Triangle 1"), wxT("Triangle 2"), wxT("Triangle 3")};
