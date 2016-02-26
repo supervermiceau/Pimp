@@ -14,7 +14,7 @@ class OpenGLCanvas : public wxGLCanvas
 		void OnPaint( wxPaintEvent& event );
 		void OnSize( wxSizeEvent& event );
 		void OnEraseBackground( wxEraseEvent& event );
-		void Draw()
+		void Draw();
 };
     
 #endif //__OPENGLCANVAS_H__
