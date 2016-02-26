@@ -23,6 +23,7 @@ void OpenGLCanvas::OnPaint( wxPaintEvent& event )
 	SetCurrent();
 	Draw();
 	SwapBuffers();
+}
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnSize( wxSizeEvent& event )
 {
