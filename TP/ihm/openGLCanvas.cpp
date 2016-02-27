@@ -38,7 +38,7 @@ void OpenGLCanvas::OnEraseBackground( wxEraseEvent& event )
 //----------------------------------------------------------------------
 void OpenGLCanvas::Draw()
 {
-	glMatrixMode( GL_PROJECTION);
+	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	int w, h;
 	GetClientSize(&w, &h);
