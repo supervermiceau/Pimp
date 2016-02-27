@@ -57,15 +57,15 @@ void OpenGLCanvas::Draw()
 
 		//gerer la couleur
 
-		if (main_frame->wCouleurCourante==wxRED)
+		if (main_frame->tab_tri[iCpt]->colour==wxRED)
 		{
 			glColor3f(255,0,0);
 		}
-		else if( main_frame->wCouleurCourante==wxGREEN)
+		else if( main_frame->tab_tri[iCpt]->colour==wxGREEN)
 			{
 				glColor3f(0,255,0);
 			}
-			else if (main_frame->wCouleurCourante==wxBLUE)
+			else if (main_frame->tab_tri[iCpt]->colour==wxBLUE)
 				{
 					glColor3f(0,0,255);
 				}
