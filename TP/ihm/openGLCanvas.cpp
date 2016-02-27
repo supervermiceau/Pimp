@@ -7,6 +7,9 @@ BEGIN_EVENT_TABLE(OpenGLCanvas, wxGLCanvas)
 	EVT_PAINT(OpenGLCanvas::OnPaint)
     EVT_SIZE(OpenGLCanvas::OnSize)
     EVT_ERASE_BACKGROUND(OpenGLCanvas::OnEraseBackground)
+    EVT_MOTION(OpenGLCanvas::OnMouseMove)
+    EVT_LEFT_DOWN(OpenGLCanvas::OnLeftDown)
+    EVT_LEFT_UP(OpenGLCanvas::OnLeftUp)
 END_EVENT_TABLE()
 //----------------------------------------------------------------------
 OpenGLCanvas::OpenGLCanvas(wxWindow *parent, wxWindowID id,const wxPoint& pos, const wxSize& size,long style, const wxString& name):wxGLCanvas(parent, id, pos, size, style, name)
@@ -97,5 +100,17 @@ void OpenGLCanvas::Draw()
 		glEnd();
     }
     glFlush();
+}
+//----------------------------------------------------------------------
+void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
+{
+}
+//----------------------------------------------------------------------
+void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
+{
+}
+//----------------------------------------------------------------------
+void OpenGLCanvas::OnLeftUp (wxMouseEvent& event)
+{
 }
 //----------------------------------------------------------------------
