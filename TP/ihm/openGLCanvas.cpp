@@ -165,39 +165,39 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
 {
-	CMainFrame* maintmp =(CMainFrame*)GetParent();
-    wxMenuBar* menu=maintmp->GetMenuBar();
+	CMainFrame* main_frame =(CMainFrame*)GetParent();
+    wxMenuBar* menu=main_frame->GetMenuBar();
     wxString buffer = wxT("triangle");
     
-    if (maintmp->num_tri >= MAX_TRI || !maintmp->isdrawing)
+    if (main_frame->num_tri >= MAX_TRI || !main_frame->isdrawing)
     {
         return;
     }
-    buffer<<(maintmp->num_tri+1);
+    buffer<<(main_frame->num_tri+1);
     switch(etape)
     {
         case 0 :
-            maintmp->tab_tri[maintmp->num_tri].p1.x = realX(event.GetX());
-            maintmp->tab_tri[maintmp->num_tri].p1.y = realY(event.GetY());
+            main_frame->tab_tri[main_frame->num_tri].p1.x = realX(event.GetX());
+            main_frame->tab_tri[main_frame->num_tri].p1.y = realY(event.GetY());
             etape ++;
             break;
         case 1 :
-            maintmp->tab_tri[maintmp->num_tri].p2.x = realX(event.GetX());
-            maintmp->tab_tri[maintmp->num_tri].p2.y = realY(event.GetY());
+            main_frame->tab_tri[main_frame->num_tri].p2.x = realX(event.GetX());
+            main_frame->tab_tri[main_frame->num_tri].p2.y = realY(event.GetY());
             etape ++;
             break;
         case 2 : 
-            maintmp->tab_tri[maintmp->num_tri].p3.x = realX(event.GetX());
-            maintmp->tab_tri[maintmp->num_tri].p3.y = realY(event.GetY());
+            main_frame->tab_tri[main_frame->num_tri].p3.x = realX(event.GetX());
+            main_frame->tab_tri[main_frame->num_tri].p3.y = realY(event.GetY());
             etape = 0;
-            maintmp->nom_tri[maintmp->num_tri]=buffer;
-            maintmp->tab_tri[maintmp->num_tri].thickness = maintmp->epaisseurtraitcourant;
-            maintmp->epaisseurtraitcourant=1;
-            glLineWidth(maintmp->epaisseurtraitcourant);
-            maintmp->tab_tri[maintmp->num_tri].colour = maintmp->couleurcourante;
-            maintmp->couleurcourante=wxBLACK;
-            glColor3i(maintmp->couleurcourante->Red(),maintmp->couleurcourante->Green(),maintmp->couleurcourante->Blue());
-            maintmp->num_tri++;
+            main_frame->nom_tri[main_frame->num_tri]=buffer;
+            main_frame->tab_tri[main_frame->num_tri].thickness = main_frame->epaisseurtraitcourant;
+            main_frame->epaisseurtraitcourant=1;
+            glLineWidth(main_frame->epaisseurtraitcourant);
+            main_frame->tab_tri[main_frame->num_tri].colour = main_frame->couleurcourante;
+            main_frame->couleurcourante=wxBLACK;
+            glColor3i(main_frame->couleurcourante->Red(),main_frame->couleurcourante->Green(),main_frame->couleurcourante->Blue());
+            main_frame->num_tri++;
             menu->Enable(MENU_MANAGEMENT, true);
             break;
         default :
