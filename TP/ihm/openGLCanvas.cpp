@@ -52,7 +52,7 @@ void OpenGLCanvas::Draw()
 	
 	   for (iCpt=0; iCpt<main_frame->num_tri; i++)
     {
-        glLineWidth(main_frame->tab_tri[iCpt].thickness);
+        glLineWidth(main_frame->tab_tri[iCpt]->thickness);
         glBegin(GL_TRIANGLES);
 
 //gerer la couleur
@@ -74,18 +74,18 @@ void OpenGLCanvas::Draw()
 			}
   
         //gerer les 3 points
-        glVertex3f(maintmp->tab_tri[iCpt].p1.x, maintmp->tab_tri[i].p1.y, 0.0f);
-        glVertex3f(maintmp->tab_tri[iCpt].p2.x, maintmp->tab_tri[i].p2.y, 0.0f);
-        glVertex3f(maintmp->tab_tri[iCpt].p3.x, maintmp->tab_tri[i].p3.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt].p1.x, maintmp->tab_tri[i].p1.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt].p2.x, maintmp->tab_tri[i].p2.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt].p3.x, maintmp->tab_tri[i].p3.y, 0.0f);
         glEnd();
         glBegin(GL_LINES);
         glColor3f(0.0,0.0,0.0);
-        glVertex3f(maintmp->tab_tri[iCpt].p1.x, maintmp->tab_tri[i].p1.y, 0.0f);
-        glVertex3f(maintmp->tab_tri[iCpt].p2.x, maintmp->tab_tri[i].p2.y, 0.0f);
-        glVertex3f(maintmp->tab_tri[iCpt].p2.x, maintmp->tab_tri[i].p2.y, 0.0f);
-        glVertex3f(maintmp->tab_tri[iCpt].p3.x, maintmp->tab_tri[i].p3.y, 0.0f);
-        glVertex3f(maintmp->tab_tri[iCpt].p3.x, maintmp->tab_tri[i].p3.y, 0.0f);
-        glVertex3f(maintmp->tab_tri[iCpt].p1.x, maintmp->tab_tri[i].p1.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt].p1.x, maintmp->tab_tri[i].p1.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt].p2.x, maintmp->tab_tri[i].p2.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt].p2.x, maintmp->tab_tri[i].p2.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt].p3.x, maintmp->tab_tri[i].p3.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt].p3.x, maintmp->tab_tri[i].p3.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt].p1.x, maintmp->tab_tri[i].p1.y, 0.0f);
         glEnd();
     }
     glFlush();
