@@ -11,6 +11,7 @@ class OpenGLCanvas : public wxGLCanvas
         ~OpenGLCanvas(void);
 
     private:
+    int etape;
     void OnPaint( wxPaintEvent& event);
     void OnSize (wxSizeEvent& event);
     void OnEraseBackground( wxEraseEvent& event);

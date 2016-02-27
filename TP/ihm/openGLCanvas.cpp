@@ -14,6 +14,7 @@ END_EVENT_TABLE()
 //----------------------------------------------------------------------
 OpenGLCanvas::OpenGLCanvas(wxWindow *parent, wxWindowID id,const wxPoint& pos, const wxSize& size,long style, const wxString& name):wxGLCanvas(parent, id, pos, size, style, name)
 {
+	etape = 0;
 }
 //----------------------------------------------------------------------
 OpenGLCanvas::~OpenGLCanvas(void)
@@ -104,10 +105,94 @@ void OpenGLCanvas::Draw()
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
 {
+		float r,g,b;
+	int thick;
+	
+    draw();
+    CMainFrame* main_frame =(CMainFrame*)GetParent();
+    if (!main_frame->isdrawing) 
+    {
+		return;
+	}
+    if (main_frame->num_tri >= MAX_TRI || !main_frame->isdrawing)
+    {
+        return;
+    }
+    if (etape == 1)
+    {
+        glColor3f(0.0,0.0,0.0);
+        thick= main_frame->get_epaisseur();
+        glLineWidth(thick);
+        glBegin(GL_LINES);
+        glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p1.x, main_frame->tab_tri[main_frame->num_tri]->p1.y);
+        glVertex2i(realX(event.GetX()),realY(event.GetY()),0);
+        glEnd();
+    }
+    if (etape == 2)
+    {
+        r=main_frame->couleurcourante->Red();
+        g=main_frame->couleurcourante->Green();
+        b=main_frame->couleurcourante->Blue();
+        glColor3f(r,g,b);
+        glBegin(GL_TRIANGLES);
+        glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p1.x, main_frame->tab_tri[main_frame->num_tri]->p1.y);
+        glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p2.x, main_frame->tab_tri[main_frame->num_tri]->p2.y);
+        glVertex2i(realX(event.GetX()), realY(event.GetY()), 0);
+        glEnd();
+        glColor3f(0.0f,0.0f,0.0f);
+        glBegin(GL_LINES);
+        glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p1.x, main_frame->tab_tri[main_frame->num_tri]->p1.y);
+        glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p2.x, main_frame->tab_tri[main_frame->num_tri]->p2.y);
+        glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p2.x, main_frame->tab_tri[main_frame->num_tri]->p2.y);
+        glVertex2i(realX(event.GetX()), realY(event.GetY()), 0);
+        glVertex2i(realX(event.GetX()), realY(event.GetY()), 0);
+        glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p1.x, main_frame->tab_tri[main_frame->num_tri]->p1.y);
+        glEnd();
+    }
+    glFlush();
+    SwapBuffers();
 }
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
 {
+	CMainFrame* maintmp =(CMainFrame*)GetParent();
+    wxMenuBar* menu=maintmp->GetMenuBar();
+    wxString buffer = wxT("triangle");
+    
+    if (maintmp->num_tri >= MAX_TRI || !maintmp->isdrawing)
+    {
+        return;
+    }
+    buffer<<(maintmp->num_tri+1);
+    switch(etape)
+    {
+        case 0 :
+            maintmp->tab_tri[maintmp->num_tri].p1.x = realX(event.GetX());
+            maintmp->tab_tri[maintmp->num_tri].p1.y = realY(event.GetY());
+            etape ++;
+            break;
+        case 1 :
+            maintmp->tab_tri[maintmp->num_tri].p2.x = realX(event.GetX());
+            maintmp->tab_tri[maintmp->num_tri].p2.y = realY(event.GetY());
+            etape ++;
+            break;
+        case 2 : 
+            maintmp->tab_tri[maintmp->num_tri].p3.x = realX(event.GetX());
+            maintmp->tab_tri[maintmp->num_tri].p3.y = realY(event.GetY());
+            etape = 0;
+            maintmp->nom_tri[maintmp->num_tri]=buffer;
+            maintmp->tab_tri[maintmp->num_tri].thickness = maintmp->epaisseurtraitcourant;
+            maintmp->epaisseurtraitcourant=1;
+            glLineWidth(maintmp->epaisseurtraitcourant);
+            maintmp->tab_tri[maintmp->num_tri].colour = maintmp->couleurcourante;
+            maintmp->couleurcourante=wxBLACK;
+            glColor3i(maintmp->couleurcourante->Red(),maintmp->couleurcourante->Green(),maintmp->couleurcourante->Blue());
+            maintmp->num_tri++;
+            menu->Enable(MENU_MANAGEMENT, true);
+            break;
+        default :
+            break;
+    }
 }
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnLeftUp (wxMouseEvent& event)
