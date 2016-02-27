@@ -137,15 +137,15 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
         glBegin(GL_TRIANGLES);
         glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p1.x, main_frame->tab_tri[main_frame->num_tri]->p1.y);
         glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p2.x, main_frame->tab_tri[main_frame->num_tri]->p2.y);
-        glVertex2i(realX(event.GetX()), realY(event.GetY()), 0);
+        glVertex2i(realX(event.GetX()), realY(event.GetY()));
         glEnd();
         glColor3f(0.0f,0.0f,0.0f);
         glBegin(GL_LINES);
         glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p1.x, main_frame->tab_tri[main_frame->num_tri]->p1.y);
         glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p2.x, main_frame->tab_tri[main_frame->num_tri]->p2.y);
         glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p2.x, main_frame->tab_tri[main_frame->num_tri]->p2.y);
-        glVertex2i(realX(event.GetX()), realY(event.GetY()), 0);
-        glVertex2i(realX(event.GetX()), realY(event.GetY()), 0);
+        glVertex2i(realX(event.GetX()), realY(event.GetY()));
+        glVertex2i(realX(event.GetX()), realY(event.GetY()));
         glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p1.x, main_frame->tab_tri[main_frame->num_tri]->p1.y);
         glEnd();
     }
@@ -193,6 +193,22 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
         default :
             break;
     }
+}
+//----------------------------------------------------------------------
+int OpenGLCanvas::realX(int x)
+{
+    int w, h;
+    
+    GetClientSize(&w, &h);
+    return (x-(w/2));
+}
+//----------------------------------------------------------------------
+int OpenGLCanvas::realY(int y)
+{
+    int w, h;
+    
+    GetClientSize(&w, &h);
+    return (-1*(y-h/2));
 }
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnLeftUp (wxMouseEvent& event)

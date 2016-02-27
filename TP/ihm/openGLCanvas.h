@@ -18,6 +18,8 @@ class OpenGLCanvas : public wxGLCanvas
     void OnMouseMove (wxMouseEvent& event);
 	void OnLeftDown (wxMouseEvent& event);
 	void OnLeftUp (wxMouseEvent& event);
+	int realX(int x);
+	int realY(int x);
 	DECLARE_EVENT_TABLE();
     void Draw();
 };
