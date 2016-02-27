@@ -194,9 +194,9 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
             main_frame->tab_tri[main_frame->num_tri].thickness = main_frame->epaisseurtraitcourant;
             main_frame->epaisseurtraitcourant=1;
             glLineWidth(main_frame->epaisseurtraitcourant);
-            main_frame->tab_tri[main_frame->num_tri].colour = main_frame->couleurcourante;
+            main_frame->tab_tri[main_frame->num_tri].colour = main_frame->wCouleurCourante;
             main_frame->couleurcourante=wxBLACK;
-            glColor3i(main_frame->couleurcourante->Red(),main_frame->couleurcourante->Green(),main_frame->couleurcourante->Blue());
+            glColor3i(main_frame->wCouleurCourante->Red(),main_frame->wCouleurCourante->Green(),main_frame->wCouleurCourante->Blue());
             main_frame->num_tri++;
             menu->Enable(MENU_MANAGEMENT, true);
             break;
