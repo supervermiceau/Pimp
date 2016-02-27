@@ -105,48 +105,58 @@ void OpenGLCanvas::Draw()
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
 {
-		float r,g,b;
-	int thick;
-	
-    draw();
+	int iTmp,iNbTri;
     CMainFrame* main_frame =(CMainFrame*)GetParent();
-    if (!main_frame->isdrawing) 
-    {
-		return;
-	}
-    if (main_frame->num_tri >= MAX_TRI || !main_frame->isdrawing)
+ 
+	iNbTri=main_frame->num_tri;
+    if (iNbTri >= MAX_TRI || !main_frame->bIsDrawing)
     {
         return;
     }
     if (etape == 1)
     {
         glColor3f(0.0,0.0,0.0);
-        thick= main_frame->get_epaisseur();
-        glLineWidth(thick);
+        iTmp= main_frame->get_epaisseur();
+        glLineWidth(iTmp);
         glBegin(GL_LINES);
-        glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p1.x, main_frame->tab_tri[main_frame->num_tri]->p1.y);
-        glVertex2i(realX(event.GetX()),realY(event.GetY()),0);
+        glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
+        glVertex2i(realX(event.GetX()),realY(event.GetY()));
         glEnd();
     }
     if (etape == 2)
     {
-        r=main_frame->couleurcourante->Red();
-        g=main_frame->couleurcourante->Green();
-        b=main_frame->couleurcourante->Blue();
-        glColor3f(r,g,b);
+		//gerer la couleur
+
+		if (main_frame->tab_tri[iCpt]->colour==wxRED)
+		{
+			glColor3f(255,0,0);
+		}
+		else if( main_frame->tab_tri[iCpt]->colour==wxGREEN)
+			{
+				glColor3f(0,255,0);
+			}
+			else if (main_frame->tab_tri[iCpt]->colour==wxBLUE)
+				{
+					glColor3f(0,0,255);
+				}
+				else
+				{
+					glColor3f(0,0,0);
+				}
+	  
         glBegin(GL_TRIANGLES);
-        glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p1.x, main_frame->tab_tri[main_frame->num_tri]->p1.y);
-        glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p2.x, main_frame->tab_tri[main_frame->num_tri]->p2.y);
+        glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
+        glVertex2f(main_frame->tab_tri[iNbTri]->p2.x, main_frame->tab_tri[iNbTri]->p2.y);
         glVertex2i(realX(event.GetX()), realY(event.GetY()));
         glEnd();
         glColor3f(0.0f,0.0f,0.0f);
         glBegin(GL_LINES);
-        glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p1.x, main_frame->tab_tri[main_frame->num_tri]->p1.y);
-        glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p2.x, main_frame->tab_tri[main_frame->num_tri]->p2.y);
-        glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p2.x, main_frame->tab_tri[main_frame->num_tri]->p2.y);
+        glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
+        glVertex2f(main_frame->tab_tri[iNbTri]->p2.x, main_frame->tab_tri[iNbTri]->p2.y);
+        glVertex2f(main_frame->tab_tri[iNbTri]->p2.x, main_frame->tab_tri[iNbTri]->p2.y);
         glVertex2i(realX(event.GetX()), realY(event.GetY()));
         glVertex2i(realX(event.GetX()), realY(event.GetY()));
-        glVertex2f(main_frame->tab_tri[main_frame->num_tri]->p1.x, main_frame->tab_tri[main_frame->num_tri]->p1.y);
+        glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
         glEnd();
     }
     glFlush();
