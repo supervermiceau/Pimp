@@ -50,7 +50,7 @@ void OpenGLCanvas::Draw()
 	glClearColor( .3f, .4f, .6f, 1);
 	glClear( GL_COLOR_BUFFER_BIT);
 	
-	   for (iCpt=0; iCpt<main_frame->num_tri; i++)
+	   for (iCpt=0; iCpt<main_frame->num_tri; iCpt++)
     {
         glLineWidth(main_frame->tab_tri[iCpt]->thickness);
         glBegin(GL_TRIANGLES);
@@ -74,18 +74,18 @@ void OpenGLCanvas::Draw()
 			}
   
         //gerer les 3 points
-        glVertex3f(main_frame->tab_tri[iCpt].p1.x, maintmp->tab_tri[i].p1.y, 0.0f);
-        glVertex3f(main_frame->tab_tri[iCpt].p2.x, maintmp->tab_tri[i].p2.y, 0.0f);
-        glVertex3f(main_frame->tab_tri[iCpt].p3.x, maintmp->tab_tri[i].p3.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt]->p1->x, maintmp->tab_tri[i].p1.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt]->p2->x, maintmp->tab_tri[i].p2.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt]->p3->x, maintmp->tab_tri[i].p3.y, 0.0f);
         glEnd();
         glBegin(GL_LINES);
         glColor3f(0.0,0.0,0.0);
-        glVertex3f(main_frame->tab_tri[iCpt].p1.x, maintmp->tab_tri[i].p1.y, 0.0f);
-        glVertex3f(main_frame->tab_tri[iCpt].p2.x, maintmp->tab_tri[i].p2.y, 0.0f);
-        glVertex3f(main_frame->tab_tri[iCpt].p2.x, maintmp->tab_tri[i].p2.y, 0.0f);
-        glVertex3f(main_frame->tab_tri[iCpt].p3.x, maintmp->tab_tri[i].p3.y, 0.0f);
-        glVertex3f(main_frame->tab_tri[iCpt].p3.x, maintmp->tab_tri[i].p3.y, 0.0f);
-        glVertex3f(main_frame->tab_tri[iCpt].p1.x, maintmp->tab_tri[i].p1.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt]->p1.x, maintmp->tab_tri[i].p1.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt]->p2.x, maintmp->tab_tri[i].p2.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt]->p2.x, maintmp->tab_tri[i].p2.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt]->p3.x, maintmp->tab_tri[i].p3.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt]->p3.x, maintmp->tab_tri[i].p3.y, 0.0f);
+        glVertex3f(main_frame->tab_tri[iCpt]->p1.x, maintmp->tab_tri[i].p1.y, 0.0f);
         glEnd();
     }
     glFlush();
