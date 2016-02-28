@@ -5,16 +5,7 @@
 #include <wx/spinctrl.h>
 #include "mainframe.h"
 #include <wx/colour.h>
-//----------------------------------------------------------------------
-enum vari { MENU_NEW,MENU_OUVRIR,MENU_SAVE,MENU_QUIT,MENU_EPAISSEUR,MENU_COULEUR,
-	MENU_GESTION, MENU_TOOLBAR,MENU_MANAGE,MENU_AIDE,TOOLBAR_TOOLS,MENU_NEWDRAW};
-enum diag {ID_TEXT=10000,ID_SLIDER,IDBOX,ID_COUL,ID_PROP,ID_SUPP};
-enum couleur{
-    RED=0,
-    GREEN,
-    BLUE,
-    MAXIMUS_PRIME,
-};
+
 //-------------------------VersionDialog--------------------------------
 
 class VersionDialog: public wxDialog
