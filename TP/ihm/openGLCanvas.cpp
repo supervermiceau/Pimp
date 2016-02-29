@@ -239,7 +239,8 @@ int OpenGLCanvas::realX(int x)
     int w, h;
     
     GetClientSize(&w, &h);
-    return (x-(w/2));
+    //~ (x-(w/2))
+    return x;
 }
 //----------------------------------------------------------------------
 int OpenGLCanvas::realY(int y)
@@ -247,7 +248,8 @@ int OpenGLCanvas::realY(int y)
     int w, h;
     
     GetClientSize(&w, &h);
-    return (-1*(y-h/2));
+    //~ (-1*(y-h/2))
+    return y;
 }
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnLeftUp (wxMouseEvent& event)
