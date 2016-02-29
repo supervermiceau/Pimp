@@ -48,7 +48,7 @@ void OpenGLCanvas::Draw()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	GetClientSize(&w, &h);
-	glOrtho(-w/1., w/1., -h/1., h/1., -1., 3.);
+	glOrtho(-w/2., w/2., -h/2., h/2., -1., 3.);
 	glMatrixMode( GL_MODELVIEW);
 	glLoadIdentity();
 	glClearColor( .3f, .4f, .6f, 1);
@@ -226,7 +226,6 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
             glColor3i(main_frame->wCouleurCourante->Red(),main_frame->wCouleurCourante->Green(),main_frame->wCouleurCourante->Blue());
             main_frame->num_tri++;
             printf(" 2 3 \n");
-            //menu->Enable(MENU_MANAGE, true);
             main_frame->menu_bar->Enable(MENU_GESTION,true);
             printf(" 2 4 \n");
             break;
