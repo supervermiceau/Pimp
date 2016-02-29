@@ -226,7 +226,7 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
             glColor3i(main_frame->wCouleurCourante->Red(),main_frame->wCouleurCourante->Green(),main_frame->wCouleurCourante->Blue());
             main_frame->num_tri++;
             printf(" 2 3 \n");
-            menu->Enable(MENU_MANAGE, true);
+            //menu->Enable(MENU_MANAGE, true);
             printf(" 2 4 \n");
             break;
         default :
