@@ -216,6 +216,7 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
         default :
             break;
     }
+    Draw();
 }
 //----------------------------------------------------------------------
 int OpenGLCanvas::realX(int x)
