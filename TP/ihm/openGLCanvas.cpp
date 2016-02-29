@@ -184,15 +184,19 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
     {
         return;
     }
-    printf(" OOOOOOOOO \n");
-   // buffer<<(main_frame->num_tri+1);
-    
+   
+   buffer<<(main_frame->num_tri);
     switch(etape)
     {
         case 0 :
+			main_frame->tab_tri[nbtri]=new Triangle();
+			printf(" 0 1 \n");
             main_frame->tab_tri[nbtri]->p1.x = realX(event.GetX());
+            printf(" 0 2 \n");
             main_frame->tab_tri[nbtri]->p1.y = realY(event.GetY());
+            printf(" 0 3 \n");
             etape ++;
+            printf(" 0 4 \n");
             break;
         case 1 :
             main_frame->tab_tri[nbtri]->p2.x = realX(event.GetX());
