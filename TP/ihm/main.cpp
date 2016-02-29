@@ -19,7 +19,7 @@ IMPLEMENT_APP(MyApp)
 bool MyApp::OnInit() 
 {	
 
-	m_MainFrame = new CMainFrame( wxString("Fenêtre", wxConvUTF8), wxPoint(50,50), wxSize(450,340) );
+	m_MainFrame = new CMainFrame( wxString("Fenêtre", wxConvUTF8), wxPoint(100,100), wxSize(900,680) );
 	m_MainFrame->Show(TRUE);
 
 	m_MainFrame->menu_bar= new wxMenuBar;
