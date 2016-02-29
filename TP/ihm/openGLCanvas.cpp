@@ -133,7 +133,6 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
     if (etape == 2)
     {
 		//gerer la couleur
-		printf(" 1 \n");
 		if (main_frame->tab_tri[iNbTri]->colour==wxRED)
 		{
 			glColor3f(255,0,0);
@@ -150,26 +149,26 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
 				{
 					glColor3f(0,0,0);
 				}
-		printf(" 2 \n");
+
         glBegin(GL_TRIANGLES);
         glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
         glVertex2f(main_frame->tab_tri[iNbTri]->p2.x, main_frame->tab_tri[iNbTri]->p2.y);
         glVertex2i(realX(event.GetX()), realY(event.GetY()));
         glEnd();
-        printf(" 3 \n");
+
         glColor3f(0.0f,0.0f,0.0f);
         glBegin(GL_LINES);
         glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
         glVertex2f(main_frame->tab_tri[iNbTri]->p2.x, main_frame->tab_tri[iNbTri]->p2.y);
         glVertex2f(main_frame->tab_tri[iNbTri]->p2.x, main_frame->tab_tri[iNbTri]->p2.y);
-        printf(" 4 \n");
+
         glVertex2i(realX(event.GetX()), realY(event.GetY()));
         glVertex2i(realX(event.GetX()), realY(event.GetY()));
-        printf(" 5 \n");
+
         glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
         glEnd();
     }
-    printf(" 6 \n");
+    
     glFlush();
     SwapBuffers();
 }
@@ -203,13 +202,19 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
             printf(" 0 4 \n");
             break;
         case 1 :
+			printf(" 1 1 \n");
             main_frame->tab_tri[nbtri]->p2.x = realX(event.GetX());
+            printf(" 1 1 \n");
             main_frame->tab_tri[nbtri]->p2.y = realY(event.GetY());
+            printf(" 1 1 \n");
             etape ++;
+            printf(" 1 1 \n");
             break;
         case 2 : 
+			printf(" 2 1 \n");
             main_frame->tab_tri[nbtri]->p3.x = realX(event.GetX());
             main_frame->tab_tri[nbtri]->p3.y = realY(event.GetY());
+            printf(" 2 2 \n");
             etape = 0;
             //main_frame->nom_tri[nbtri]=buffer;
             main_frame->tab_tri[nbtri]->thickness = main_frame->iEpaisseurTraitCourante;
@@ -219,6 +224,7 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
             main_frame->wCouleurCourante=wxBLACK;
             glColor3i(main_frame->wCouleurCourante->Red(),main_frame->wCouleurCourante->Green(),main_frame->wCouleurCourante->Blue());
             main_frame->num_tri++;
+            printf(" 2 3 \n");
             menu->Enable(MENU_MANAGE, true);
             break;
         default :
