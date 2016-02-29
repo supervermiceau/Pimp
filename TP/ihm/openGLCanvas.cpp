@@ -48,7 +48,7 @@ void OpenGLCanvas::Draw()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	GetClientSize(&w, &h);
-	glOrtho(w/2., w/2., h/2., h/2., 1., 3.);
+	glOrtho(-w/2., w/2., -h/2., h/2., -1., 3.);
 	glMatrixMode( GL_MODELVIEW);
 	glLoadIdentity();
 	glClearColor( .3f, .4f, .6f, 1);
@@ -100,6 +100,13 @@ void OpenGLCanvas::Draw()
 		glVertex2f(main_frame->tab_tri[iCpt]->p3.x, main_frame->tab_tri[iCpt]->p3.y);
 		glEnd();
     }
+    //~ glBegin(GL_TRIANGLES);
+    //~ 
+    	//~ glVertex2f(0.0f, 0.0f);
+		//~ glVertex2f(0.0f, 100.0f);
+		//~ glVertex2f(100.0f, 0.0f);
+		//~ glColor3f(255,255,0);
+		//~ glEnd();
     glFlush();
 }
 //----------------------------------------------------------------------
@@ -109,14 +116,14 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
     CMainFrame* main_frame =(CMainFrame*)GetParent();
  
 	iNbTri=main_frame->num_tri;
-    if (iNbTri >= MAX_TRI || !main_frame->bIsDrawing)
+    if (iNbTri >= 4 || !main_frame->bIsDrawing)
     {
         return;
     }
     if (etape == 1)
     {
         glColor3f(0.0,0.0,0.0);
-        iTmp= main_frame->get_epaisseur();
+        iTmp= main_frame->iEpaisseurTraitCourante;
         glLineWidth(iTmp);
         glBegin(GL_LINES);
         glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
@@ -127,15 +134,15 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
     {
 		//gerer la couleur
 
-		if (main_frame->tab_tri[iCpt]->colour==wxRED)
+		if (main_frame->tab_tri[iNbTri]->colour==wxRED)
 		{
 			glColor3f(255,0,0);
 		}
-		else if( main_frame->tab_tri[iCpt]->colour==wxGREEN)
+		else if( main_frame->tab_tri[iNbTri]->colour==wxGREEN)
 			{
 				glColor3f(0,255,0);
 			}
-			else if (main_frame->tab_tri[iCpt]->colour==wxBLUE)
+			else if (main_frame->tab_tri[iNbTri]->colour==wxBLUE)
 				{
 					glColor3f(0,0,255);
 				}
@@ -167,38 +174,44 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
 {
 	CMainFrame* main_frame =(CMainFrame*)GetParent();
     wxMenuBar* menu=main_frame->GetMenuBar();
+    
     wxString buffer = wxT("triangle");
     int nbtri=main_frame->num_tri;
-    if (main_frame->num_tri >= MAX_TRI || !main_frame->isdrawing)
+    
+       
+
+    if (nbtri >= 4 || !main_frame->bIsDrawing)
     {
         return;
     }
-    buffer<<(main_frame->num_tri+1);
+    printf(" OOOOOOOOO \n");
+   // buffer<<(main_frame->num_tri+1);
+    
     switch(etape)
     {
         case 0 :
-            main_frame->tab_tri[nbtri].p1.x = realX(event.GetX());
-            main_frame->tab_tri[nbtri].p1.y = realY(event.GetY());
+            main_frame->tab_tri[nbtri]->p1.x = realX(event.GetX());
+            main_frame->tab_tri[nbtri]->p1.y = realY(event.GetY());
             etape ++;
             break;
         case 1 :
-            main_frame->tab_tri[nbtri].p2.x = realX(event.GetX());
-            main_frame->tab_tri[nbtri].p2.y = realY(event.GetY());
+            main_frame->tab_tri[nbtri]->p2.x = realX(event.GetX());
+            main_frame->tab_tri[nbtri]->p2.y = realY(event.GetY());
             etape ++;
             break;
         case 2 : 
-            main_frame->tab_tri[nbtri].p3.x = realX(event.GetX());
-            main_frame->tab_tri[nbtri].p3.y = realY(event.GetY());
+            main_frame->tab_tri[nbtri]->p3.x = realX(event.GetX());
+            main_frame->tab_tri[nbtri]->p3.y = realY(event.GetY());
             etape = 0;
-            main_frame->nom_tri[nbtri]=buffer;
-            main_frame->tab_tri[nbtri].thickness = main_frame->iEpaisseurTraitCourante;
+            //main_frame->nom_tri[nbtri]=buffer;
+            main_frame->tab_tri[nbtri]->thickness = main_frame->iEpaisseurTraitCourante;
             main_frame->iEpaisseurTraitCourante=1;
             glLineWidth(main_frame->iEpaisseurTraitCourante);
-            main_frame->tab_tri[nbtri].colour = main_frame->wCouleurCourante;
+            main_frame->tab_tri[nbtri]->colour = main_frame->wCouleurCourante;
             main_frame->wCouleurCourante=wxBLACK;
             glColor3i(main_frame->wCouleurCourante->Red(),main_frame->wCouleurCourante->Green(),main_frame->wCouleurCourante->Blue());
             main_frame->num_tri++;
-            menu->Enable(MENU_MANAGEMENT, true);
+            menu->Enable(MENU_MANAGE, true);
             break;
         default :
             break;
