@@ -187,7 +187,7 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
     {
         return;
     }
-   
+   printf("RE \n");
    buffer<<(main_frame->num_tri);
     switch(etape)
     {
@@ -227,6 +227,7 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
             main_frame->num_tri++;
             printf(" 2 3 \n");
             menu->Enable(MENU_MANAGE, true);
+            printf(" 2 4 \n");
             break;
         default :
             break;
