@@ -8,7 +8,6 @@
 #include "dialogs.h"
 #include "triangle.h"
 #include "openGLCanvas.h"
-int MAX_TRI 4
 //----------------------------------------------------------------------
 
 enum vari { MENU_NEW,MENU_OUVRIR,MENU_SAVE,MENU_QUIT,MENU_EPAISSEUR,MENU_COULEUR,
