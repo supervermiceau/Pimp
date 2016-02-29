@@ -176,7 +176,7 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
 void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
 {
 	CMainFrame* main_frame =(CMainFrame*)GetParent();
-    wxMenuBar* menu=main_frame->GetMenuBar();
+    //wxMenuBar* menu=main_frame->GetMenuBar();
     
     wxString buffer = wxT("triangle");
     int nbtri=main_frame->num_tri;
@@ -227,6 +227,7 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
             main_frame->num_tri++;
             printf(" 2 3 \n");
             //menu->Enable(MENU_MANAGE, true);
+            main_frame->menu_bar->Enable(MENU_GESTION,true);
             printf(" 2 4 \n");
             break;
         default :
