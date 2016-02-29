@@ -133,7 +133,7 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
     if (etape == 2)
     {
 		//gerer la couleur
-
+		printf(" 1 \n");
 		if (main_frame->tab_tri[iNbTri]->colour==wxRED)
 		{
 			glColor3f(255,0,0);
@@ -150,22 +150,26 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
 				{
 					glColor3f(0,0,0);
 				}
-	  
+		printf(" 2 \n");
         glBegin(GL_TRIANGLES);
         glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
         glVertex2f(main_frame->tab_tri[iNbTri]->p2.x, main_frame->tab_tri[iNbTri]->p2.y);
         glVertex2i(realX(event.GetX()), realY(event.GetY()));
         glEnd();
+        printf(" 3 \n");
         glColor3f(0.0f,0.0f,0.0f);
         glBegin(GL_LINES);
         glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
         glVertex2f(main_frame->tab_tri[iNbTri]->p2.x, main_frame->tab_tri[iNbTri]->p2.y);
         glVertex2f(main_frame->tab_tri[iNbTri]->p2.x, main_frame->tab_tri[iNbTri]->p2.y);
+        printf(" 4 \n");
         glVertex2i(realX(event.GetX()), realY(event.GetY()));
         glVertex2i(realX(event.GetX()), realY(event.GetY()));
+        printf(" 5 \n");
         glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
         glEnd();
     }
+    printf(" 6 \n");
     glFlush();
     SwapBuffers();
 }
