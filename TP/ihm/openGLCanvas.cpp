@@ -181,53 +181,37 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
     wxString buffer = wxT("triangle");
     int nbtri=main_frame->num_tri;
     
-       
-
     if (nbtri >= 4 || !main_frame->bIsDrawing)
     {
         return;
     }
-   printf("RE \n");
    buffer<<(main_frame->num_tri);
     switch(etape)
     {
         case 0 :
 			main_frame->tab_tri[nbtri]=new Triangle();
 			//main_frame->num_tri++;
-			printf(" 0 1 \n");
             main_frame->tab_tri[nbtri]->p1.x = realX(event.GetX());
-            printf(" 0 2 \n");
             main_frame->tab_tri[nbtri]->p1.y = realY(event.GetY());
-            printf(" 0 3 \n");
             etape ++;
-            printf(" 0 4 \n");
             break;
         case 1 :
-			printf(" 1 1 \n");
             main_frame->tab_tri[nbtri]->p2.x = realX(event.GetX());
-            printf(" 1 1 \n");
             main_frame->tab_tri[nbtri]->p2.y = realY(event.GetY());
-            printf(" 1 1 \n");
             etape ++;
-            printf(" 1 1 \n");
             break;
         case 2 : 
-			printf(" 2 1 \n");
             main_frame->tab_tri[nbtri]->p3.x = realX(event.GetX());
             main_frame->tab_tri[nbtri]->p3.y = realY(event.GetY());
-            printf(" 2 2 \n");
             etape = 0;
             //main_frame->nom_tri[nbtri]=buffer;
             main_frame->tab_tri[nbtri]->thickness = main_frame->iEpaisseurTraitCourante;
             main_frame->iEpaisseurTraitCourante=1;
             glLineWidth(main_frame->iEpaisseurTraitCourante);
             main_frame->tab_tri[nbtri]->colour = main_frame->wCouleurCourante;
-            main_frame->wCouleurCourante=wxBLACK;
             glColor3i(main_frame->wCouleurCourante->Red(),main_frame->wCouleurCourante->Green(),main_frame->wCouleurCourante->Blue());
             main_frame->num_tri++;
-            printf(" 2 3 \n");
             main_frame->menu_bar->Enable(MENU_GESTION,true);
-            printf(" 2 4 \n");
             break;
         default :
             break;
