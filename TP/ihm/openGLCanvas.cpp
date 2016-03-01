@@ -114,7 +114,7 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
 {
 	int iTmp,iNbTri;
     CMainFrame* main_frame =(CMainFrame*)GetParent();
- 
+	Draw();
 	iNbTri=main_frame->num_tri;
     if (iNbTri >= 4 || !main_frame->bIsDrawing)
     {
@@ -129,7 +129,6 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
         glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
         glVertex2i(realX(event.GetX()),realY(event.GetY()));
         glEnd();
-		Draw();
     }
     if (etape == 2)
     {
@@ -168,7 +167,6 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
 
         glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
         glEnd();
-        Draw();
     }
     
     glFlush();
