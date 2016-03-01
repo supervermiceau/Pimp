@@ -259,7 +259,7 @@ void OpenGLCanvas::OnRightDown(wxMouseEvent& event)
             submenu1 = new wxMenu;
             submenu2 = new wxMenu;
             submenu3 = new wxMenu;
-            submenu1->Append(MENU_OPEN, wxT("Ouvrir fichier"));
+            submenu1->Append(MENU_OUVRIR, wxT("Ouvrir fichier"));
             submenu1->Append(MENU_SAVE, wxT("Sauvegarder fichier"));
             submenu2->Append(MENU_GESTION, wxT("Gestion des triangles"));
             submenu3->Append(MENU_COULEUR, wxT("Couleurs courantes"));
