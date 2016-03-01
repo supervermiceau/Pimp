@@ -10,6 +10,9 @@ BEGIN_EVENT_TABLE(OpenGLCanvas, wxGLCanvas)
     EVT_MOTION(OpenGLCanvas::OnMouseMove)
     EVT_LEFT_DOWN(OpenGLCanvas::OnLeftDown)
     EVT_LEFT_UP(OpenGLCanvas::OnLeftUp)
+    EVT_RIGHT_DOWN(OpenGLCanvas::OnRightDown)
+    EVT_MENU(ID_SUPP,OpenGLCanvas::OnContextSupp)
+    EVT_MENU(ID_PROP,OpenGLCanvas::OnContextPptes)
 END_EVENT_TABLE()
 //----------------------------------------------------------------------
 OpenGLCanvas::OpenGLCanvas(wxWindow *parent, wxWindowID id,const wxPoint& pos, const wxSize& size,long style, const wxString& name):wxGLCanvas(parent, id, pos, size, style, name)
@@ -241,3 +244,102 @@ void OpenGLCanvas::OnLeftUp (wxMouseEvent& event)
 {
 }
 //----------------------------------------------------------------------
+void OpenGLCanvas::OnRightDown(wxMouseEvent& event)
+{
+    CMainFrame * main_frame = (CMainFrame *)GetParent();
+    int w, h;
+    
+    GetClientSize(&w, &h);
+    selected_tri = IsItIn(event.m_x-w/2, -1*(event.m_y-h/2));
+    if (selected_tri == -1)
+    {
+        if (!clic_busy_out)
+        {
+            //Init
+            submenu1 = new wxMenu;
+            submenu2 = new wxMenu;
+            submenu3 = new wxMenu;
+            submenu1->Append(MENU_OPEN, wxT("Ouvrir fichier"));
+            submenu1->Append(MENU_SAVE, wxT("Sauvegarder fichier"));
+            submenu2->Append(MENU_MANAGEMENT, wxT("Gestion des triangles"));
+            submenu3->Append(MENU_COLOR, wxT("Couleurs courantes"));
+            submenu3->Append(MENU_WIDTH, wxT("Epaisseur courante"));
+            popup.Append(ID_SUB1, wxT("Fichier"),submenu1);
+            popup.Append(ID_SUB2, wxT("Gestion"),submenu2);
+            popup.Append(ID_SUB3, wxT("Valeurs courantes"),submenu3);
+            clic_busy_out = true;
+        }
+        if (main_frame->num_tri > 0)
+        {
+            submenu2->Enable(MENU_MANAGEMENT,true);
+		}
+        else
+        {
+            submenu2->Enable(MENU_MANAGEMENT,false);
+		}
+        PopupMenu(&popup, event.GetX(), event.GetY());
+    }
+    else
+    {
+        if(!clic_busy_in)
+        {
+            //Init
+            propri = new wxMenuItem(&popup_tri,ID_PROP, wxT("Proprietes de ce triangle"),wxEmptyString, wxITEM_NORMAL,NULL);
+            supprim = new wxMenuItem(&popup_tri,ID_SUPP, wxT("Suppression de ce triangle"),wxEmptyString, wxITEM_NORMAL,NULL);
+            
+            popup_tri.Append(propri);
+            popup_tri.Append(supprim);
+            clic_busy_in = true;
+        }
+        PopupMenu(&popup_tri, event.GetX(), event.GetY());
+    }
+}
+//----------------------------------------------------------------------
+int OpenGLCanvas::IsItIn(int x, int y)
+{
+    CMainFrame * main_frame = (CMainFrame *)GetParent();
+    int resultat=0;
+    int i;
+    
+    for (i=main_frame->num_tri-1; i>=0;i--)
+    {
+        if (main_frame->tab_tri[i].IsPointInTriangle(x,y))
+        {
+            return i;
+		}
+    }
+    return -1;
+}
+//----------------------------------------------------------------------
+void OpenGLCanvas::OnContextSupp (wxCommandEvent& event)
+{
+    CMainFrame * main_frame=(CMainFrame *)GetParent();
+    
+    for (int i=selected_tri; i<main_frame->num_tri;i++)
+    {
+        main_frame->tab_tri[i]=main_frame->tab_tri[i+1];
+        main_frame->nom_tri[i]=main_frame->nom_tri[i+1];
+    }
+    main_frame->num_tri--;
+    if (main_frame->num_tri==0)
+    {
+        wxMenuBar* menu=main_frame->GetMenuBar();
+        menu->Enable(GESTION,false);
+    }
+}
+//----------------------------------------------------------------------
+void OpenGLCanvas::OnContextPptes (wxCommandEvent& event)
+{
+    CMainFrame * main_frame = (CMainFrame *)GetParent();
+    wxCommandEvent evt(wxEVT_COMMAND_BUTTON_CLICKED, ID_PROP);
+
+    GestDialog mdlg (main_frame,-1, wxT("Gestion des Triangles"));
+    mdlg.list->Clear();
+    for (int i=0; i<main_frame->num_tri;i++)
+    {
+        mdlg.list->Append(maintmp->nom_tri[i]);
+    }
+    mdlg.list->SetSelection(selected_tri);
+    mdlg.GetEventHandler()->ProcessEvent(evt);
+}
+//---------------------------------------------------------------------

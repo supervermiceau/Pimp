@@ -19,6 +19,8 @@ public:
 	const wxColour *colour;
 
 	float thickness;
+	
+	bool IsPointInTriangle(int x, int y);
 };
 
 #endif // #ifndef __TRIANGLE_H__
