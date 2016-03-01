@@ -253,7 +253,7 @@ void OpenGLCanvas::OnRightDown(wxMouseEvent& event)
     selected_tri = IsItIn(event.m_x-w/2, -1*(event.m_y-h/2));
     if (selected_tri == -1)
     {
-        if (!clic_busy_out)
+        if (!clic_busy_in)
         {
             //Init
             submenu1 = new wxMenu;
@@ -267,7 +267,7 @@ void OpenGLCanvas::OnRightDown(wxMouseEvent& event)
             popup.Append(ID_SUB1, wxT("Fichier"),submenu1);
             popup.Append(ID_SUB2, wxT("Gestion"),submenu2);
             popup.Append(ID_SUB3, wxT("Valeurs courantes"),submenu3);
-            clic_busy_out = true;
+            clic_busy_in = true;
         }
         if (main_frame->num_tri > 0)
         {
@@ -281,7 +281,7 @@ void OpenGLCanvas::OnRightDown(wxMouseEvent& event)
     }
     else
     {
-        if(!clic_busy_in)
+        if(!clic_busy_out)
         {
             //Init
             propri = new wxMenuItem(&popup_tri,ID_PROP, wxT("Proprietes de ce triangle"),wxEmptyString, wxITEM_NORMAL,NULL);
@@ -289,7 +289,7 @@ void OpenGLCanvas::OnRightDown(wxMouseEvent& event)
             
             popup_tri.Append(propri);
             popup_tri.Append(supprim);
-            clic_busy_in = true;
+            clic_busy_out = true;
         }
         PopupMenu(&popup_tri, event.GetX(), event.GetY());
     }
