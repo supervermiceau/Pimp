@@ -31,7 +31,7 @@ class OpenGLCanvas : public wxGLCanvas
 	void OnRightDown(wxMouseEvent& event);
 	void OnContextSupp (wxCommandEvent& event);
 	void OnContextPptes (wxCommandEvent& event);
-	int IsItIn(int x, int y)
+	int IsItIn(int x, int y);
 	int realX(int x);
 	int realY(int x);
 	DECLARE_EVENT_TABLE();
