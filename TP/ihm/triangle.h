@@ -19,7 +19,7 @@ public:
 	const wxColour *colour;
 
 	float thickness;
-	int Triangle::ComputeZCoordinate(point P1, point P2, int x, int y)
+	int Triangle::ComputeZCoordinate(point P1, point P2, int x, int y);
 	bool IsPointInTriangle(int x, int y);
 };
 
