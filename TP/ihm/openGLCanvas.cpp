@@ -129,6 +129,7 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
         glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
         glVertex2i(realX(event.GetX()),realY(event.GetY()));
         glEnd();
+		Draw();
     }
     if (etape == 2)
     {
@@ -167,6 +168,7 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
 
         glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
         glEnd();
+        Draw();
     }
     
     glFlush();
