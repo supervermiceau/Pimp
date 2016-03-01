@@ -224,7 +224,7 @@ int OpenGLCanvas::realX(int x)
     int w, h;
     
     GetClientSize(&w, &h);
-    //~ (x-(w/2))
+    
     return (x-(w/2));
 }
 //----------------------------------------------------------------------
@@ -233,7 +233,7 @@ int OpenGLCanvas::realY(int y)
     int w, h;
     
     GetClientSize(&w, &h);
-    //~ (-1*(y-h/2))
+    
     return (-1*(y-h/2));
 }
 //----------------------------------------------------------------------
