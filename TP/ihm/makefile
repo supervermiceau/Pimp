@@ -12,6 +12,9 @@ dialogs.o : dialogs.cpp dialogs.h mainframe.h
 mainframe.o : mainframe.cpp mainframe.h
 	$(CC) `wx-config --cxxflags` -c mainframe.cpp -o mainframe.o
 	
+triangle.o : triangle.cpp triangle.h
+	$(CC) `wx-config --cxxflags` -c triangle.cpp -o triangle.o
+	
 openGLCanvas.o : openGLCanvas.cpp openGLCanvas.h
 	$(CC) -lglut `wx-config --cxxflags` -c openGLCanvas.cpp -o openGLCanvas.o -lglut -lGL
 clean : 
