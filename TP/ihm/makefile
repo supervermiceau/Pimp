@@ -1,7 +1,7 @@
 CC = g++
 
-drawtri : main.o mainframe.o dialogs.o openGLCanvas.o
-	$(CC) -o drawtri main.o mainframe.o dialogs.o openGLCanvas.o `wx-config --libs --gl-libs` -lglut -lGL
+drawtri : main.o mainframe.o dialogs.o openGLCanvas.o triangle.o
+	$(CC) -o drawtri main.o mainframe.o dialogs.o openGLCanvas.o triangle.o `wx-config --libs --gl-libs` -lglut -lGL
 
 main.o : main.cpp 
 	$(CC) `wx-config --cxxflags` -c main.cpp -o main.o
