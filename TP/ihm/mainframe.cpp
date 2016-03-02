@@ -18,7 +18,7 @@ EVT_MENU(MENU_COULEUR, CMainFrame::OnCouleur)
 EVT_MENU(MENU_GESTION, CMainFrame::OnGest)
 EVT_MENU(MENU_NEWDRAW, CMainFrame::OnDraw)
 EVT_MENU(MENU_TOOLBAR, CMainFrame::OnToolBar)
-
+EVT_MENU(MENU_OUVRIR_AIDE, CMainFrame::OnHelp)
 END_EVENT_TABLE()
 
 //----------------------------------------------------------------------
@@ -64,6 +64,7 @@ void CMainFrame::CreateMyToolbar()
 //--------------Fonction ouvrir-----------------------------------------
 void CMainFrame::OnNew(wxCommandEvent& event)
 {
+	//suppresion du tableau de triangle
 	if(num_tri > 0)
 	{
 		for(int iCpt=num_tri-1; iCpt<=0; iCpt--)
@@ -224,23 +225,31 @@ void CMainFrame::OnAide(wxCommandEvent& event)
 void CMainFrame::OnEpaisseur(wxCommandEvent& event)
 {
 	//affichage boite
-	EpaisseurDialog vdlg(this, -1, wxT("Epaisseur"));
-	vdlg.ShowModal();
+	EpaisseurDialog edlg(this, -1, wxT("Epaisseur"));
+	edlg.slider->SetValue(iEpaisseurTraitCourante);
+	edlg.ShowModal();
 }
 //--------------Fonction Couleur----------------------------------------
 void CMainFrame::OnCouleur(wxCommandEvent& event)
 {
 	//affichage boite
-	CouleurDialog vdlg(this, -1, wxT("Couleur"));
-	vdlg.ShowModal();
+	CouleurDialog cdlg(this, -1, wxT("Couleur"));
+	if(wCouleurCourante == wxRED)
+		cdlg.radio->SetSelection(0);
+	if(wCouleurCourante == wxGREEN)
+		cdlg.radio->SetSelection(1);
+	if(wCouleurCourante == wxBLUE)
+		cdlg.radio->SetSelection(2);
+		
+	cdlg.ShowModal();
 }
 //--------------Fonction Gestion----------------------------------------
 void CMainFrame::OnGest(wxCommandEvent& event)
 {
-	GestDialog vdlg(this, -1, wxT("Gestion"));
+	GestDialog gdlg(this, -1, wxT("Gestion"));
 	
-	vdlg.Rafraichir();
-	vdlg.ShowModal();
+	gdlg.Rafraichir();
+	gdlg.ShowModal();
 }
 //--------------Fonction Gestion----------------------------------------
 void CMainFrame::OnDraw(wxCommandEvent& event)
@@ -289,7 +298,7 @@ void CMainFrame::Supprimer_tri(int n)
 {
 	Triangle *tfree;
 	
-	//Gestion du n hors ensemble
+	//n dans ensemble
 	if((n > 4)||(n<0))
 	{
 		return;
@@ -305,3 +314,7 @@ void CMainFrame::Supprimer_tri(int n)
 	free(tfree);
 }
 //----------------------------------------------------------------------
+void CMainFrame::OnHelp(wxCommandEvent& event)
+{
+	help.DisplayContents();
+}

@@ -51,6 +51,8 @@ bool MyApp::OnInit()
 	
 	//rubrique aide
 	aide->Append(MENU_AIDE, wxT("version\tCtrl-N"));
+	aide->Append(MENU_OUVRIR_AIDE, wxT("ouvrir l'aide"));
+
 	
 	//rubrique affichage
 	m_MainFrame->affichage->AppendCheckItem(MENU_TOOLBAR,wxT("Toolbar"));
@@ -59,6 +61,13 @@ bool MyApp::OnInit()
 	
 	m_MainFrame->SetMenuBar(m_MainFrame->menu_bar);
 	m_MainFrame->CreateMyToolbar();
+	
+	if(!m_MainFrame->help.Initialize("HELP"))
+	{
+		wxLogError(wxT("Cannot initialize the help system, aborting."));
+		return FALSE;
+	}
+	
 
 	return TRUE;
 } 
