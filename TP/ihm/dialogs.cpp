@@ -113,13 +113,10 @@ void CouleurDialog::OnRadio(wxCommandEvent& event)
     switch (col)
     {
         case 0 : main_frame->wCouleurCourante=wxRED;
-				printf("deerre \n");
                  break;
         case 1 : main_frame->wCouleurCourante=wxGREEN;
-        		printf("deerre \n");
                  break;
         case 2 : main_frame->wCouleurCourante=wxBLUE;
-        		printf("deerre \n");
                  break;
         default : main_frame->wCouleurCourante=wxBLACK;
                   break;
@@ -220,7 +217,6 @@ void GestDialog::OnSupp(wxCommandEvent& event)
 	{
 		main_frame->Supprimer_tri(list->GetSelection());
 		Rafraichir();
-		printf("%d uu\n",main_frame->num_tri);
 	}
 }
 //----------------------------------------------------------------------

@@ -235,7 +235,7 @@ int OpenGLCanvas::realY(int y)
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnLeftUp (wxMouseEvent& event)
 {
-	printf(" X : %d, Y : %d \n",realX(event.GetX()), realY(event.GetY()));
+	//printf(" X : %d, Y : %d \n",realX(event.GetX()), realY(event.GetY()));
 }
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnRightDown(wxMouseEvent& event)
