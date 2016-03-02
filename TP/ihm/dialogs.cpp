@@ -289,12 +289,16 @@ PropDialog::PropDialog( wxWindow *parent, wxWindowID id,const wxString &title) :
 //----------------------------------------------------------------------
 void PropDialog::OnRadio(wxCommandEvent& event)
 {
+  //declaration
   int col = radio->GetSelection();
   int iT;
   GestDialog *gest=(GestDialog*)this->GetParent();
   CMainFrame *main_frame=(CMainFrame*)gest->GetParent();
+	
+	//recuperation du triangle selectionné
 	iT=gest->list->GetSelection();
 	
+	//enregistrment couleur
 	if(col == 0)
     {
 		main_frame->tab_tri[iT]->colour=wxRED;
@@ -316,7 +320,9 @@ void PropDialog::OnSpin(wxSpinEvent& event)
   GestDialog *gest=(GestDialog*)this->GetParent();
   CMainFrame *main_frame=(CMainFrame*)gest->GetParent();
   
+	//recuperation triangle selectionné
 	iT=gest->list->GetSelection();
+	//changement valeur 
 	main_frame->tab_tri[iT]->thickness= epaisse->GetValue();
   
 }
