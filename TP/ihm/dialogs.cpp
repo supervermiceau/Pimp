@@ -182,10 +182,13 @@ void GestDialog::OnProp(wxCommandEvent& event)
 	//recuperation de la selection
 	stmp=this->list->GetStringSelection();
 	iT=this->list->GetSelection();
+	
 	//on affiche dans txtctrl
 	vdlg.TxtCtrl->SetValue(stmp);
+	
 	//on initialise l'epaisseuir
 	vdlg.epaisse->SetValue(main_frame->tab_tri[iT]->thickness);
+	
 	//initisalisation de la couleur
 	if((main_frame->tab_tri[iT]->colour)==wxRED)
     {
