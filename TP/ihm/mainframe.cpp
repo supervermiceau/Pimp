@@ -157,13 +157,12 @@ void CMainFrame::OnSave(wxCommandEvent& event)
 {
 	wxFileDialog saveFileDialog(this, _("Save tri file"), "", "","tri files (*.tri)|*.tri", wxFD_SAVE|wxFD_OVERWRITE_PROMPT);
 	if (saveFileDialog.ShowModal() == wxID_CANCEL)
-        return;     // the user changed idea...
+        return;    
 	
     
-    // proceed loading the file chosen by the user;
-    // this can be done with e.g. wxWidgets input streams:
+
     std::ofstream fs(saveFileDialog.GetPath().fn_str(), std::ios::out);	
-	// if open file failed, show an error message box
+
 	if (!fs)
 	{
 		wxString errormsg, caption;
@@ -295,6 +294,7 @@ void CMainFrame::Supprimer_tri(int n)
 	{
 		return;
 	}
+	
 	tfree=tab_tri[n];
 	//suppression n
 	for(int iCpt =  n; iCpt<num_tri; iCpt++)
