@@ -307,48 +307,29 @@ int OpenGLCanvas::IsItIn(int x, int y)
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnContextSupp (wxCommandEvent& event)
 {
-    //~ CMainFrame * main_frame=(CMainFrame *)GetParent();
-    //~ 
-    //~ for (int i=selected_tri; i<main_frame->num_tri;i++)
-    //~ {
-        //~ main_frame->tab_tri[i]=main_frame->tab_tri[i+1];
-        //~ //main_frame->nom_tri[i]=main_frame->nom_tri[i+1];
-    //~ }
-    //~ main_frame->num_tri--;
-    //~ if (main_frame->num_tri==0)
-    //~ {
-        //~ wxMenuBar* menu=main_frame->GetMenuBar();
-        //~ menu->Enable(MENU_GESTION,false);
-    //~ }
-    //~ CMainFrame *main_frame=(CMainFrame*)this->GetParent();
-//~ 
-	//~ //deselection du menu si jamais il n'y a plus de triangles	
-	//~ if(main_frame->num_tri == 1)
-	//~ {
-		//~ main_frame->menu_bar->Enable(MENU_GESTION,false);
-	//~ }
-	//~ //decrementation de num_tri
-	//~ if(main_frame->num_tri>0)
-	//~ {
-		//~ main_frame->Supprimer_tri(list->GetSelection());
-		//~ Rafraichir();
-		//~ printf("%d uu\n",main_frame->num_tri);
-	//~ }
+	CMainFrame * main_frame = (CMainFrame *)GetParent();
+	if(main_frame->num_tri == 1)
+	{
+		main_frame->menu_bar->Enable(MENU_GESTION,false);
+	}
+	main_frame->Supprimer_tri(selected_tri);
+	//deselection du menu si jamais il n'y a plus de triangles	
+
+	
 }
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnContextPptes (wxCommandEvent& event)
 {
-    //~ CMainFrame * main_frame = (CMainFrame *)GetParent();
-    //~ wxCommandEvent evt(wxEVT_COMMAND_BUTTON_CLICKED, ID_PROP);
-//~ 
-    //~ GestDialog mdlg (main_frame,-1, wxT("Gestion des Triangles"));
-    //~ mdlg.list->Clear();
-    //~ for (int i=0; i<main_frame->num_tri;i++)
-    //~ {
-        //~ mdlg.list->Append(main_frame->nom_tri[i]);
-    //~ }
-    //~ mdlg.list->SetSelection(selected_tri);
-    //~ mdlg.GetEventHandler()->ProcessEvent(evt);
-	
+    CMainFrame * main_frame = (CMainFrame *)GetParent();
+    wxCommandEvent evt(wxEVT_COMMAND_BUTTON_CLICKED, ID_PROP);
+
+    GestDialog mdlg (main_frame,-1, wxT("Gestion des Triangles"));
+    mdlg.list->Clear();
+    for (int i=0; i<main_frame->num_tri;i++)
+    {
+        mdlg.list->Append(NameCol[i]);
+    }
+    mdlg.list->SetSelection(selected_tri);
+    mdlg.GetEventHandler()->ProcessEvent(evt);
 }
 //---------------------------------------------------------------------

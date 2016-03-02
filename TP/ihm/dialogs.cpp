@@ -237,6 +237,8 @@ void GestDialog::Rafraichir()
 //--------------------CLASS PROPRIETE-----------------------------------
 //----------------------------------------------------------------------
 BEGIN_EVENT_TABLE(PropDialog, wxDialog)
+EVT_RADIOBOX(ID_COUL, PropDialog::OnRadio)
+EVT_SPINCTRL(ID_SPIN, PropDialog::OnSpin)
 END_EVENT_TABLE()
 //----------------------------------------------------------------------
 PropDialog::PropDialog( wxWindow *parent, wxWindowID id,const wxString &title) : wxDialog( parent, id, wxT("Proprieté"))
@@ -256,10 +258,10 @@ PropDialog::PropDialog( wxWindow *parent, wxWindowID id,const wxString &title) :
     TxtCtrl= new wxTextCtrl(this, ID_TEXT, title, wxPoint(-1, -1), wxSize(-1,-1),wxTE_PROCESS_TAB, wxDefaultValidator);
     
     //creation slection +-
-    epaisse= new wxSpinCtrl(this, wxID_ANY, wxT("Epaisseur Trait"), wxPoint(-1,-1), wxSize(-1,-1),wxSP_ARROW_KEYS | wxSP_WRAP, 0 , 10, 1 );
+    epaisse= new wxSpinCtrl(this, ID_SPIN, wxT("Epaisseur Trait"), wxPoint(-1,-1), wxSize(-1,-1),wxSP_ARROW_KEYS | wxSP_WRAP, 0 , 10, 1 );
 
 	//Creation choix radio
-    radio= new wxRadioBox(this, wxID_ANY, wxT("Couleur"), wxPoint(-1, -1), wxSize(-1,-1),3, strs8);
+    radio= new wxRadioBox(this, ID_COUL, wxT("Couleur"), wxPoint(-1, -1), wxSize(-1,-1),3, strs8);
 
 	//creation bouton ok
     wxButton *butt = new wxButton( this, wxID_OK, wxT("OK"), wxDefaultPosition);
@@ -284,3 +286,38 @@ PropDialog::PropDialog( wxWindow *parent, wxWindowID id,const wxString &title) :
     principale->Fit(this);
     principale->SetSizeHints(this);	
 }
+//----------------------------------------------------------------------
+void PropDialog::OnRadio(wxCommandEvent& event)
+{
+  int col = radio->GetSelection();
+  int iT;
+  GestDialog *gest=(GestDialog*)this->GetParent();
+  CMainFrame *main_frame=(CMainFrame*)gest->GetParent();
+	iT=gest->list->GetSelection();
+	
+	if(col == 0)
+    {
+		main_frame->tab_tri[iT]->colour=wxRED;
+	}
+	else if(col == 1)
+		{
+			main_frame->tab_tri[iT]->colour=wxGREEN;
+		}
+		else if(col == 2)
+			{
+				main_frame->tab_tri[iT]->colour=wxBLUE;
+			}	
+	
+}
+//----------------------------------------------------------------------
+void PropDialog::OnSpin(wxSpinEvent& event)
+{
+  int iT;
+  GestDialog *gest=(GestDialog*)this->GetParent();
+  CMainFrame *main_frame=(CMainFrame*)gest->GetParent();
+  
+	iT=gest->list->GetSelection();
+	main_frame->tab_tri[iT]->thickness= epaisse->GetValue();
+  
+}
+//----------------------------------------------------------------------

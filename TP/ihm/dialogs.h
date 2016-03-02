@@ -67,6 +67,8 @@ public :
      wxSpinCtrl *epaisse;
      wxRadioBox *radio;
 private :
+	void OnRadio(wxCommandEvent& event);
+	void OnSpin(wxSpinEvent& event);
 
 DECLARE_EVENT_TABLE();
 };
