@@ -192,7 +192,6 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
     {
         case 0 :
 			main_frame->tab_tri[nbtri]=new Triangle();
-			//main_frame->num_tri++;
             main_frame->tab_tri[nbtri]->p1.x = realX(event.GetX());
             main_frame->tab_tri[nbtri]->p1.y = realY(event.GetY());
             etape ++;
@@ -206,7 +205,6 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
             main_frame->tab_tri[nbtri]->p3.x = realX(event.GetX());
             main_frame->tab_tri[nbtri]->p3.y = realY(event.GetY());
             etape = 0;
-            //main_frame->nom_tri[nbtri]=buffer;
             main_frame->tab_tri[nbtri]->thickness = main_frame->iEpaisseurTraitCourante;
             main_frame->iEpaisseurTraitCourante=1;
             glLineWidth(main_frame->iEpaisseurTraitCourante);
@@ -220,22 +218,18 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
     }
     Draw();
 }
-//----------------------------------------------------------------------
+//-------------------------realX----------------------------------------
 int OpenGLCanvas::realX(int x)
 {
     int w, h;
-    
     GetClientSize(&w, &h);
-    
     return (x-(w/2));
 }
-//----------------------------------------------------------------------
+//---------------------------realY--------------------------------------
 int OpenGLCanvas::realY(int y)
 {
     int w, h;
-    
     GetClientSize(&w, &h);
-    
     return (-1*(y-h/2));
 }
 //----------------------------------------------------------------------
