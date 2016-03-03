@@ -61,12 +61,11 @@ class PropDialog: public wxDialog
 {
 public :
      PropDialog(wxWindow *parent, wxWindowID id,const wxString &title);
-
-private :
      //declaradion 
     wxTextCtrl *TxtCtrl;
     wxSpinCtrl *epaisse;
     wxRadioBox *radio;
+private :
 	void OnRadio(wxCommandEvent& event);
 	void OnSpin(wxSpinEvent& event);
 
