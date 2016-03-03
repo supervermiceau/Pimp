@@ -228,7 +228,8 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
         default :
             break;
     }
-    Draw();
+    //Draw();
+    Refresh();
 }
 //-------------------------realX----------------------------------------
 int OpenGLCanvas::realX(int x)
@@ -262,6 +263,7 @@ void OpenGLCanvas::OnLeftUp (wxMouseEvent& event)
 		main_frame->tab_tri[main_frame->num_tri]->p2.y = realY(event.GetY());
 		etape ++;
 	}
+	Refresh();
 	//printf(" X : %d, Y : %d \n",realX(event.GetX()), realY(event.GetY()));
 }
 //-----------------OnRightDown------------------------------------------
