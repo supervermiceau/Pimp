@@ -3,7 +3,7 @@
 #include <wx/glcanvas.h>
 #include <wx/dcclient.h>
 #include "wx/wx.h"
-//----------------------------------------------------------------------
+//----------------Classe OpenGLCanvas-----------------------------------
 class OpenGLCanvas : public wxGLCanvas 
 {
     public:
@@ -37,5 +37,5 @@ class OpenGLCanvas : public wxGLCanvas
 	DECLARE_EVENT_TABLE();
     void Draw();
 };
-    //ééé
+
 #endif //__OPENGLCANVAS_H__

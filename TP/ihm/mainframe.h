@@ -20,7 +20,7 @@ enum couleur{
     BLUE,
 };
 static wxString NameCol[] = {wxT("Triangle 0"), wxT("Triangle 1"), wxT("Triangle 2"), wxT("Triangle 3")};
-//----------------------------------------------------------------------
+//---------------------Classe CMainFrame--------------------------------
 class CMainFrame: public wxFrame
 {
 public:

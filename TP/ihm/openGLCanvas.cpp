@@ -19,6 +19,22 @@ OpenGLCanvas::OpenGLCanvas(wxWindow *parent, wxWindowID id,const wxPoint& pos, c
 {
 	//init etape
 	etape = 0;
+	//init des menus
+    submenu1 = new wxMenu;
+    submenu2 = new wxMenu;
+    submenu3 = new wxMenu;
+    submenu1->Append(MENU_OUVRIR, wxT("Ouvrir fichier"));
+    submenu1->Append(MENU_SAVE, wxT("Sauvegarder fichier"));
+    submenu2->Append(MENU_GESTION, wxT("Gestion des triangles"));
+    submenu3->Append(MENU_COULEUR, wxT("Couleurs courantes"));
+    submenu3->Append(MENU_EPAISSEUR, wxT("Epaisseur courante"));
+    popup.Append(ID_SUB1, wxT("Fichier"),submenu1);
+    popup.Append(ID_SUB2, wxT("Gestion"),submenu2);
+    popup.Append(ID_SUB3, wxT("Valeurs courantes"),submenu3);
+    propri = new wxMenuItem(&popup_tri,ID_PROP, wxT("Proprietes de ce triangle"),wxEmptyString, wxITEM_NORMAL,NULL);
+    supprim = new wxMenuItem(&popup_tri,ID_SUPP, wxT("Suppression de ce triangle"),wxEmptyString, wxITEM_NORMAL,NULL);
+    popup_tri.Append(propri);
+    popup_tri.Append(supprim);
 }
 //----------------Destructeur-------------------------------------------
 OpenGLCanvas::~OpenGLCanvas(void)
@@ -244,25 +260,10 @@ void OpenGLCanvas::OnRightDown(wxMouseEvent& event)
     int w, h;
     
     GetClientSize(&w, &h);
-    selected_tri = IsItIn(event.m_x-w/2, -1*(event.m_y-h/2));
-    if (selected_tri == -1)
+    //recuperation triangle
+    selected_tri = IsItIn(realX(event.GetX()), realY(event.GetY()));
+    if (selected_tri == -1)// pas de triangle
     {
-        if (!clic_busy_in)
-        {
-            //Init
-            submenu1 = new wxMenu;
-            submenu2 = new wxMenu;
-            submenu3 = new wxMenu;
-            submenu1->Append(MENU_OUVRIR, wxT("Ouvrir fichier"));
-            submenu1->Append(MENU_SAVE, wxT("Sauvegarder fichier"));
-            submenu2->Append(MENU_GESTION, wxT("Gestion des triangles"));
-            submenu3->Append(MENU_COULEUR, wxT("Couleurs courantes"));
-            submenu3->Append(MENU_EPAISSEUR, wxT("Epaisseur courante"));
-            popup.Append(ID_SUB1, wxT("Fichier"),submenu1);
-            popup.Append(ID_SUB2, wxT("Gestion"),submenu2);
-            popup.Append(ID_SUB3, wxT("Valeurs courantes"),submenu3);
-            clic_busy_in = true;
-        }
         if (main_frame->num_tri > 0)
         {
             submenu2->Enable(MENU_GESTION,true);
@@ -273,18 +274,8 @@ void OpenGLCanvas::OnRightDown(wxMouseEvent& event)
 		}
         PopupMenu(&popup, event.GetX(), event.GetY());
     }
-    else
+    else // un triangle -> prop menu triangle
     {
-        if(!clic_busy_out)
-        {
-            //Init
-            propri = new wxMenuItem(&popup_tri,ID_PROP, wxT("Proprietes de ce triangle"),wxEmptyString, wxITEM_NORMAL,NULL);
-            supprim = new wxMenuItem(&popup_tri,ID_SUPP, wxT("Suppression de ce triangle"),wxEmptyString, wxITEM_NORMAL,NULL);
-            
-            popup_tri.Append(propri);
-            popup_tri.Append(supprim);
-            clic_busy_out = true;
-        }
         PopupMenu(&popup_tri, event.GetX(), event.GetY());
     }
 }
@@ -294,7 +285,7 @@ int OpenGLCanvas::IsItIn(int x, int y)
     CMainFrame * main_frame = (CMainFrame *)GetParent();
     int resultat=0;
     int i;
-
+	//on cherche si le point est dans un triangle
     for (i=main_frame->num_tri-1; i>=0;i--)
     {
         if (main_frame->tab_tri[i]->IsPointInTriangle(x,y))
@@ -302,16 +293,19 @@ int OpenGLCanvas::IsItIn(int x, int y)
             return i;
 		}
     }
+    //si pas de triangle renvoie -1 pour gestion du cas hors triangle
     return -1;
 }
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnContextSupp (wxCommandEvent& event)
 {
 	CMainFrame * main_frame = (CMainFrame *)GetParent();
+	//desactivation de gestion des triangles si 1 triangle
 	if(main_frame->num_tri == 1)
 	{
 		main_frame->menu_bar->Enable(MENU_GESTION,false);
 	}
+	//suppression triangle
 	main_frame->Supprimer_tri(selected_tri);
 	Refresh();
 	
@@ -320,16 +314,19 @@ void OpenGLCanvas::OnContextSupp (wxCommandEvent& event)
 void OpenGLCanvas::OnContextPptes (wxCommandEvent& event)
 {
     CMainFrame * main_frame = (CMainFrame *)GetParent();
+    //on creer un evenement "clique"
     wxCommandEvent evt(wxEVT_COMMAND_BUTTON_CLICKED, ID_PROP);
 
-    GestDialog mdlg (main_frame,-1, wxT("Gestion des Triangles"));
-    mdlg.list->Clear();
+    GestDialog gdlg (main_frame,-1, wxT("Gestion des Triangles"));
+    gdlg.list->Clear();
+    //rafraichissement de la liste de triangle
     for (int i=0; i<main_frame->num_tri;i++)
     {
-        mdlg.list->Append(NameCol[i]);
+        gdlg.list->Append(NameCol[i]);
     }
-    mdlg.list->SetSelection(selected_tri);
-    mdlg.GetEventHandler()->ProcessEvent(evt);
+    //on declenche l'evenement clique
+    gdlg.list->SetSelection(selected_tri);
+    gdlg.GetEventHandler()->ProcessEvent(evt);
     Refresh();
 }
 //---------------------------------------------------------------------

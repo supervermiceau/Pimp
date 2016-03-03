@@ -115,7 +115,7 @@ void CouleurDialog::OnRadio(wxCommandEvent& event)
                  break;
         case 2 : main_frame->wCouleurCourante=wxBLUE;
                  break;
-        default : main_frame->wCouleurCourante=wxBLACK;
+        default : main_frame->wCouleurCourante=wxRED;
                   break;
 	}
 }
@@ -170,6 +170,13 @@ void GestDialog::OnProp(wxCommandEvent& event)
 	CMainFrame *main_frame=(CMainFrame*)this->GetParent();
 	wxString stmp;
 	int iT;
+	
+	//cas ou pas de triangle
+	if(main_frame->num_tri <=0)
+	{
+		return;
+	}
+	
 	PropDialog vdlg(this,-1,wxT("Vert"));
 	
 	//recuperation de la selection
