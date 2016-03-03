@@ -2,6 +2,8 @@
 //----------------------------------------------------------------------
 //--------------------CLASS VERSION-------------------------------------
 //--------------------Table evenement-----------------------------------
+//creation de la table d'evenements
+
 BEGIN_EVENT_TABLE(VersionDialog, wxDialog)
 END_EVENT_TABLE ()
 //--------------Constructeur VersionDialog------------------------------
@@ -162,7 +164,6 @@ GestDialog::GestDialog(wxWindow *parent, wxWindowID id,const wxString &title): w
     this->SetSizer(principale);
     principale->Fit(this);
     principale->SetSizeHints(this);	
-	
 }
 //--------------------Fonction propriete--------------------------------
 void GestDialog::OnProp(wxCommandEvent& event)
@@ -215,6 +216,7 @@ void GestDialog::OnSupp(wxCommandEvent& event)
 	{
 		main_frame->menu_bar->Enable(MENU_GESTION,false);
 	}
+	
 	//decrementation de num_tri
 	if(main_frame->num_tri>0)
 	{
@@ -226,6 +228,7 @@ void GestDialog::OnSupp(wxCommandEvent& event)
 void GestDialog::Rafraichir()
 {
 	CMainFrame *main_frame=(CMainFrame*)this->GetParent();
+	
 	//vider la liste
 	list->Clear();
 	
@@ -234,7 +237,6 @@ void GestDialog::Rafraichir()
 	{
 		list->Append(NameCol[iCpt]);
 	}
-
 }
 //----------------------------------------------------------------------
 //--------------------CLASS PROPRIETE-----------------------------------
@@ -283,7 +285,6 @@ PropDialog::PropDialog( wxWindow *parent, wxWindowID id,const wxString &title) :
     principale-> Add(milieu, 0, wxALIGN_CENTRE | wxALL, 10);
     principale-> Add(butt, 0, wxALIGN_CENTRE | wxALL, 10);
 
-
     this->SetAutoLayout(true);
     this->SetSizer(principale);
     principale->Fit(this);
@@ -314,7 +315,6 @@ void PropDialog::OnRadio(wxCommandEvent& event)
 			{
 				main_frame->tab_tri[iT]->colour=wxBLUE;
 			}	
-	
 }
 //----------------------------------------------------------------------
 void PropDialog::OnSpin(wxSpinEvent& event)
@@ -327,6 +327,5 @@ void PropDialog::OnSpin(wxSpinEvent& event)
 	iT=gest->list->GetSelection();
 	//changement valeur 
 	main_frame->tab_tri[iT]->thickness= epaisse->GetValue();
-  
 }
 //----------------------------------------------------------------------
