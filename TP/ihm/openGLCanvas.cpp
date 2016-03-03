@@ -2,7 +2,7 @@
 #include "mainframe.h"
 #include <wx/event.h>
 #include "triangle.h"
-//----------------------------------------------------------------------
+//--------------------Table evenement-----------------------------------
 BEGIN_EVENT_TABLE(OpenGLCanvas, wxGLCanvas)    
 	EVT_PAINT(OpenGLCanvas::OnPaint)
     EVT_SIZE(OpenGLCanvas::OnSize)
@@ -14,17 +14,17 @@ BEGIN_EVENT_TABLE(OpenGLCanvas, wxGLCanvas)
     EVT_MENU(ID_SUPP,OpenGLCanvas::OnContextSupp)
     EVT_MENU(ID_PROP,OpenGLCanvas::OnContextPptes)
 END_EVENT_TABLE()
-//----------------------------------------------------------------------
+//--------------Constructeur--------------------------------------------
 OpenGLCanvas::OpenGLCanvas(wxWindow *parent, wxWindowID id,const wxPoint& pos, const wxSize& size,long style, const wxString& name):wxGLCanvas(parent, id, pos, size, style, name)
 {
 	//init etape
 	etape = 0;
 }
-//----------------------------------------------------------------------
+//----------------Destructeur-------------------------------------------
 OpenGLCanvas::~OpenGLCanvas(void)
 {
 }
-//----------------------------------------------------------------------
+//----------------OnPaint------------------------------------------------
 void OpenGLCanvas::OnPaint( wxPaintEvent& event )
 {
 	wxPaintDC dc(this);
@@ -32,18 +32,18 @@ void OpenGLCanvas::OnPaint( wxPaintEvent& event )
 	Draw();
 	SwapBuffers();
 }
-//----------------------------------------------------------------------
+//----------------OnSize------------------------------------------------
 void OpenGLCanvas::OnSize( wxSizeEvent& event )
 {
 	wxGLCanvas::OnSize(event);
 	int w,h;
 	GetClientSize(&w, &h);
 }
-//----------------------------------------------------------------------
+//----------------OnEraseBackground-------------------------------------
 void OpenGLCanvas::OnEraseBackground( wxEraseEvent& event )
 {
 }
-//----------------------------------------------------------------------
+//----------------Draw--------------------------------------------------
 void OpenGLCanvas::Draw()
 {
 	CMainFrame *main_frame=(CMainFrame*)this->GetParent();
@@ -58,13 +58,14 @@ void OpenGLCanvas::Draw()
 	glClearColor( .3f, .4f, .6f, 1);
 	glClear( GL_COLOR_BUFFER_BIT);
 	
+	//recuperation couleur
 	for (iCpt=0; iCpt<main_frame->num_tri; iCpt++)
     {
+		//tracage triangles
         glLineWidth(main_frame->tab_tri[iCpt]->thickness);
         glBegin(GL_TRIANGLES);
 
 		//gerer la couleur
-
 		if (main_frame->tab_tri[iCpt]->colour==wxRED)
 		{
 			glColor3f(255,0,0);
@@ -88,6 +89,7 @@ void OpenGLCanvas::Draw()
 		glVertex2f(main_frame->tab_tri[iCpt]->p3.x, main_frame->tab_tri[iCpt]->p3.y);
 		glEnd();
 		
+		//Tracage triangle contour
 		glBegin(GL_LINES);
 		glColor3f(0.0,0.0,0.0);
 		glVertex2f(main_frame->tab_tri[iCpt]->p1.x, main_frame->tab_tri[iCpt]->p1.y);
@@ -111,13 +113,15 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
 {
 	int iTmp,iNbTri;
     CMainFrame* main_frame =(CMainFrame*)GetParent();
-	Draw();
+	
 	iNbTri=main_frame->num_tri;
+	
+	//verification nombre triangle
     if (iNbTri >= 4 || !main_frame->bIsDrawing)
     {
         return;
     }
-    if (etape == 1)
+    if (etape == 1) //etape
     {
         glColor3f(0.0,0.0,0.0);
         iTmp= main_frame->iEpaisseurTraitCourante;
@@ -165,9 +169,10 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
         glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
         glEnd();
     }
-    
+   
     glFlush();
     SwapBuffers();
+    Draw();
 }
 //----------------------------------------------------------------------
 void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
@@ -295,7 +300,7 @@ int OpenGLCanvas::IsItIn(int x, int y)
     CMainFrame * main_frame = (CMainFrame *)GetParent();
     int resultat=0;
     int i;
-    
+
     for (i=main_frame->num_tri-1; i>=0;i--)
     {
         if (main_frame->tab_tri[i]->IsPointInTriangle(x,y))
@@ -314,11 +319,10 @@ void OpenGLCanvas::OnContextSupp (wxCommandEvent& event)
 		main_frame->menu_bar->Enable(MENU_GESTION,false);
 	}
 	main_frame->Supprimer_tri(selected_tri);
-	//deselection du menu si jamais il n'y a plus de triangles	
-
+	Refresh();
 	
 }
-//----------------------------------------------------------------------
+//-----------------OnContextPptes---------------------------------------
 void OpenGLCanvas::OnContextPptes (wxCommandEvent& event)
 {
     CMainFrame * main_frame = (CMainFrame *)GetParent();
@@ -332,5 +336,6 @@ void OpenGLCanvas::OnContextPptes (wxCommandEvent& event)
     }
     mdlg.list->SetSelection(selected_tri);
     mdlg.GetEventHandler()->ProcessEvent(evt);
+    Refresh();
 }
 //---------------------------------------------------------------------

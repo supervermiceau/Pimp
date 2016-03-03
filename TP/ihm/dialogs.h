@@ -7,7 +7,6 @@
 #include <wx/colour.h>
 
 //-------------------------VersionDialog--------------------------------
-
 class VersionDialog: public wxDialog
 {
 public :

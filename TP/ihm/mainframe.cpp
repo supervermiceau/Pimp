@@ -5,8 +5,7 @@
 
 #include "mainframe.h"
 
-//----------------------------------------------------------------------
-
+//----------------------Table evenement---------------------------------
 BEGIN_EVENT_TABLE(CMainFrame, wxFrame)
 EVT_MENU(MENU_NEW, CMainFrame::OnNew)
 EVT_MENU(MENU_OUVRIR, CMainFrame::OnOpen)
@@ -20,7 +19,6 @@ EVT_MENU(MENU_NEWDRAW, CMainFrame::OnDraw)
 EVT_MENU(MENU_TOOLBAR, CMainFrame::OnToolBar)
 EVT_MENU(MENU_OUVRIR_AIDE, CMainFrame::OnHelp)
 END_EVENT_TABLE()
-
 //----------------------------------------------------------------------
 CMainFrame::CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 : wxFrame((wxFrame *)NULL, -1, title, pos, size) 
@@ -28,7 +26,7 @@ CMainFrame::CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& 
 	//initialisation des variables
 	iEpaisseurTraitCourante= 1;
 	wCouleurCourante= wxBLACK;
-	num_tri= 0;	
+	num_tri= 0;
 	opgcan=new OpenGLCanvas(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, wxT("OpenGLCANVAS"));
 
 } //constructor
@@ -67,11 +65,13 @@ void CMainFrame::OnNew(wxCommandEvent& event)
 	//suppresion du tableau de triangle
 	if(num_tri > 0)
 	{
-		for(int iCpt=num_tri-1; iCpt<=0; iCpt--)
+		for(int iCpt=num_tri-1; iCpt>=0; iCpt--)
 		{
 			free(tab_tri[iCpt]);
 		}
 	}
+	num_tri=0;
+	opgcan->Refresh();
 }
 //--------------Fonction open-------------------------------------------
 void CMainFrame::OnOpen(wxCommandEvent& event)
@@ -151,7 +151,7 @@ void CMainFrame::OnOpen(wxCommandEvent& event)
 	{
 		menu_bar->Enable(MENU_GESTION,true);
 	}	
-
+	opgcan->Refresh();
 }
 //--------------Fonction Save-------------------------------------------
 void CMainFrame::OnSave(wxCommandEvent& event)

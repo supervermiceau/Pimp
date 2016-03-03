@@ -1,12 +1,9 @@
 #include "dialogs.h"
 //----------------------------------------------------------------------
 //--------------------CLASS VERSION-------------------------------------
-//----------------------------------------------------------------------
-//creation de la table d'evenements
+//--------------------Table evenement-----------------------------------
 BEGIN_EVENT_TABLE(VersionDialog, wxDialog)
-
 END_EVENT_TABLE ()
-
 //----------------------------------------------------------------------
 VersionDialog::VersionDialog( wxWindow *parent, wxWindowID id, const wxString &title) 
 : wxDialog( parent, id, title)
@@ -32,7 +29,7 @@ VersionDialog::VersionDialog( wxWindow *parent, wxWindowID id, const wxString &t
 }
 //----------------------------------------------------------------------
 //--------------------CLASS EPAISSEUR-----------------------------------
-//----------------------------------------------------------------------
+//--------------------Table evenement-----------------------------------
 BEGIN_EVENT_TABLE(EpaisseurDialog, wxDialog)
 EVT_COMMAND_SCROLL( ID_SLIDER, EpaisseurDialog::OnSlider)
 END_EVENT_TABLE ()
@@ -72,7 +69,7 @@ void EpaisseurDialog::OnSlider(wxScrollEvent& event)
 }
 //----------------------------------------------------------------------
 //--------------------CLASS COULEUR-------------------------------------
-//----------------------------------------------------------------------
+//--------------------Table evenement-----------------------------------
 BEGIN_EVENT_TABLE(CouleurDialog, wxDialog)
 EVT_RADIOBOX(ID_COUL, CouleurDialog::OnRadio)
 END_EVENT_TABLE ()
@@ -124,11 +121,10 @@ void CouleurDialog::OnRadio(wxCommandEvent& event)
 }
 //----------------------------------------------------------------------
 //--------------------CLASS GESTION-------------------------------------
-//----------------------------------------------------------------------
+//--------------------Table evenement-----------------------------------
 BEGIN_EVENT_TABLE(GestDialog, wxDialog)
 EVT_BUTTON(ID_PROP, GestDialog::OnProp)
 EVT_BUTTON(ID_SUPP, GestDialog::OnSupp)
-
 END_EVENT_TABLE ()
 //----------------------------------------------------------------------
 GestDialog::GestDialog(wxWindow *parent, wxWindowID id,const wxString &title): wxDialog( parent, id, title)
@@ -235,7 +231,7 @@ void GestDialog::Rafraichir()
 }
 //----------------------------------------------------------------------
 //--------------------CLASS PROPRIETE-----------------------------------
-//----------------------------------------------------------------------
+//--------------------Table evenement-----------------------------------
 BEGIN_EVENT_TABLE(PropDialog, wxDialog)
 EVT_RADIOBOX(ID_COUL, PropDialog::OnRadio)
 EVT_SPINCTRL(ID_SPIN, PropDialog::OnSpin)

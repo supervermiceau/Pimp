@@ -1,10 +1,10 @@
 #include "triangle.h"
-//----------------------------------------------------------------------
+//------------ComputeCoordinate----------------------------------------
 int Triangle::ComputeZCoordinate(point P1, point P2, int x, int y) 
 {
     return P1.x * (P2.y - y) + P2.x * (y - P1.y) + x * (P1.y - P2.y);
 }
-//----------------------------------------------------------------------
+//-------------IsPointInTriangle----------------------------------------
 bool Triangle::IsPointInTriangle(int x, int y)
 {
     int z1 = ComputeZCoordinate(p1, p2, x, y);
