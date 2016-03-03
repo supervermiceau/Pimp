@@ -25,7 +25,7 @@ CMainFrame::CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& 
 {
 	//initialisation des variables
 	iEpaisseurTraitCourante= 1;
-	wCouleurCourante= wxBLACK;
+	wCouleurCourante= wxRED;
 	num_tri= 0;
 	opgcan=new OpenGLCanvas(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, wxT("OpenGLCANVAS"));
 
@@ -293,7 +293,7 @@ void CMainFrame::SetBool(bool bnew)
 {
 	
 }
-//----------------------------------------------------------------------
+//----------------Supprimer_tri-----------------------------------------
 void CMainFrame::Supprimer_tri(int n)
 {
 	Triangle *tfree;
@@ -313,8 +313,9 @@ void CMainFrame::Supprimer_tri(int n)
 	num_tri--;
 	free(tfree);
 }
-//----------------------------------------------------------------------
+//---------------OnHelp-------------------------------------------------
 void CMainFrame::OnHelp(wxCommandEvent& event)
 {
+	//ouvre l'aide
 	help.DisplayContents();
 }

@@ -4,7 +4,7 @@
 //--------------------Table evenement-----------------------------------
 BEGIN_EVENT_TABLE(VersionDialog, wxDialog)
 END_EVENT_TABLE ()
-//----------------------------------------------------------------------
+//--------------Constructeur VersionDialog------------------------------
 VersionDialog::VersionDialog( wxWindow *parent, wxWindowID id, const wxString &title) 
 : wxDialog( parent, id, title)
 {
@@ -33,7 +33,7 @@ VersionDialog::VersionDialog( wxWindow *parent, wxWindowID id, const wxString &t
 BEGIN_EVENT_TABLE(EpaisseurDialog, wxDialog)
 EVT_COMMAND_SCROLL( ID_SLIDER, EpaisseurDialog::OnSlider)
 END_EVENT_TABLE ()
-//----------------------------------------------------------------------
+//---------------Constructeur EpaisseurDialog---------------------------
 EpaisseurDialog::EpaisseurDialog(wxWindow *parent, wxWindowID id,const wxString &title) : wxDialog( parent, id, title)
 {
 	//creation du conteneur vertical
@@ -59,7 +59,7 @@ EpaisseurDialog::EpaisseurDialog(wxWindow *parent, wxWindowID id,const wxString 
 	item0->Fit( this );
 	item0->SetSizeHints( this );
 }
-//-------------------EpaisseurDialog::OnSlider--------------------------
+//-------------------OnSlider-------------------------------------------
 void EpaisseurDialog::OnSlider(wxScrollEvent& event)
 {
 	CMainFrame *main_frame=(CMainFrame*)this->GetParent();
@@ -73,7 +73,7 @@ void EpaisseurDialog::OnSlider(wxScrollEvent& event)
 BEGIN_EVENT_TABLE(CouleurDialog, wxDialog)
 EVT_RADIOBOX(ID_COUL, CouleurDialog::OnRadio)
 END_EVENT_TABLE ()
-//----------------------------------------------------------------------
+//-------------constructeur---------------------------------------------
 CouleurDialog::CouleurDialog(wxWindow *parent, wxWindowID id,const wxString &title): wxDialog( parent, id, title)
 {
 	wxString strs8[] = {wxT("Red"),  wxT("Green"),  wxT("Blue")};
@@ -100,7 +100,7 @@ CouleurDialog::CouleurDialog(wxWindow *parent, wxWindowID id,const wxString &tit
     principale->Fit(this);
     principale->SetSizeHints(this);	
 }
-//----------------------------------------------------------------------
+//-----------------OnRadio----------------------------------------------
 void CouleurDialog::OnRadio(wxCommandEvent& event)
 {
   int col = radio->GetSelection();

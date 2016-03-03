@@ -14,11 +14,7 @@
 enum vari { MENU_NEW,MENU_OUVRIR,MENU_SAVE,MENU_QUIT,MENU_EPAISSEUR,MENU_COULEUR,
 	MENU_GESTION, MENU_TOOLBAR,MENU_MANAGE,MENU_AIDE,TOOLBAR_TOOLS,MENU_NEWDRAW,ID_SUB1,ID_SUB2,ID_SUB3, ID_SPIN,MENU_OUVRIR_AIDE};
 enum diag {ID_TEXT=10000,ID_SLIDER,IDBOX,ID_COUL,ID_PROP,ID_SUPP};
-enum couleur{
-    RED=0,
-    GREEN,
-    BLUE,
-};
+
 static wxString NameCol[] = {wxT("Triangle 0"), wxT("Triangle 1"), wxT("Triangle 2"), wxT("Triangle 3")};
 //---------------------Classe CMainFrame--------------------------------
 class CMainFrame: public wxFrame

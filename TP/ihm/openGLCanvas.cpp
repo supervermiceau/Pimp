@@ -124,7 +124,7 @@ void OpenGLCanvas::Draw()
     }
     glFlush();
 }
-//----------------------------------------------------------------------
+//-----------------OnMouseMove------------------------------------------
 void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
 {
 	int iTmp,iNbTri;
@@ -190,7 +190,7 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
     SwapBuffers();
     Draw();
 }
-//----------------------------------------------------------------------
+//-----------------OnLeftDown-------------------------------------------
 void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
 {
 	CMainFrame* main_frame =(CMainFrame*)GetParent();
@@ -212,11 +212,7 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
             main_frame->tab_tri[nbtri]->p1.y = realY(event.GetY());
             etape ++;
             break;
-        case 1 :
-            main_frame->tab_tri[nbtri]->p2.x = realX(event.GetX());
-            main_frame->tab_tri[nbtri]->p2.y = realY(event.GetY());
-            etape ++;
-            break;
+            
         case 2 : 
             main_frame->tab_tri[nbtri]->p3.x = realX(event.GetX());
             main_frame->tab_tri[nbtri]->p3.y = realY(event.GetY());
@@ -248,12 +244,18 @@ int OpenGLCanvas::realY(int y)
     GetClientSize(&w, &h);
     return (-1*(y-h/2));
 }
-//----------------------------------------------------------------------
+//-----------------OnLeftUp---------------------------------------------
 void OpenGLCanvas::OnLeftUp (wxMouseEvent& event)
 {
+	if(etape == 1)
+	{
+		main_frame->tab_tri[nbtri]->p2.x = realX(event.GetX());
+		main_frame->tab_tri[nbtri]->p2.y = realY(event.GetY());
+		etape ++;
+	}
 	//printf(" X : %d, Y : %d \n",realX(event.GetX()), realY(event.GetY()));
 }
-//----------------------------------------------------------------------
+//-----------------OnRightDown------------------------------------------
 void OpenGLCanvas::OnRightDown(wxMouseEvent& event)
 {
     CMainFrame * main_frame = (CMainFrame *)GetParent();
@@ -264,6 +266,7 @@ void OpenGLCanvas::OnRightDown(wxMouseEvent& event)
     selected_tri = IsItIn(realX(event.GetX()), realY(event.GetY()));
     if (selected_tri == -1)// pas de triangle
     {
+		//Pas de triangle on desactive la gestion de triangle
         if (main_frame->num_tri > 0)
         {
             submenu2->Enable(MENU_GESTION,true);
@@ -279,7 +282,7 @@ void OpenGLCanvas::OnRightDown(wxMouseEvent& event)
         PopupMenu(&popup_tri, event.GetX(), event.GetY());
     }
 }
-//----------------------------------------------------------------------
+//----------------IsItIn------------------------------------------------
 int OpenGLCanvas::IsItIn(int x, int y)
 {
     CMainFrame * main_frame = (CMainFrame *)GetParent();
@@ -296,7 +299,7 @@ int OpenGLCanvas::IsItIn(int x, int y)
     //si pas de triangle renvoie -1 pour gestion du cas hors triangle
     return -1;
 }
-//----------------------------------------------------------------------
+//-----------------OnContextSupp----------------------------------------
 void OpenGLCanvas::OnContextSupp (wxCommandEvent& event)
 {
 	CMainFrame * main_frame = (CMainFrame *)GetParent();
