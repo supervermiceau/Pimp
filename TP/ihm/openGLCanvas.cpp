@@ -132,12 +132,12 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
 	
 	iNbTri=main_frame->num_tri;
 	
-	//verification nombre triangle
+	//verification nombre triangle et dessin active
     if (iNbTri >= 4 || !main_frame->bIsDrawing)
     {
         return;
     }
-    if (etape == 1) //etape
+    if (etape == 1) //etape 1 tracage trait avec curseur
     {
         glColor3f(0.0,0.0,0.0);
         iTmp= main_frame->iEpaisseurTraitCourante;
@@ -147,7 +147,7 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
         glVertex2i(realX(event.GetX()),realY(event.GetY()));
         glEnd();
     }
-    if (etape == 2)
+    if (etape == 2) //etape 2 tracage triangle avec curseur
     {
 		//gerer la couleur
 		if (main_frame->tab_tri[iNbTri]->colour==wxRED)
@@ -166,13 +166,15 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
 				{
 					glColor3f(0,0,0);
 				}
-
-        glBegin(GL_TRIANGLES);
+		
+		//tracage triangle
+		glBegin(GL_TRIANGLES);
         glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
         glVertex2f(main_frame->tab_tri[iNbTri]->p2.x, main_frame->tab_tri[iNbTri]->p2.y);
         glVertex2i(realX(event.GetX()), realY(event.GetY()));
         glEnd();
 
+		//tracage contour du triangle
         glColor3f(0.0f,0.0f,0.0f);
         glBegin(GL_LINES);
         glVertex2f(main_frame->tab_tri[iNbTri]->p1.x, main_frame->tab_tri[iNbTri]->p1.y);
@@ -194,26 +196,24 @@ void OpenGLCanvas::OnMouseMove (wxMouseEvent& event)
 void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
 {
 	CMainFrame* main_frame =(CMainFrame*)GetParent();
-    //wxMenuBar* menu=main_frame->GetMenuBar();
-    
-    wxString buffer = wxT("triangle");
     int nbtri=main_frame->num_tri;
     
+    //verification nombre triangle et dessin active
     if (nbtri >= 4 || !main_frame->bIsDrawing)
     {
         return;
     }
-   buffer<<(main_frame->num_tri);
+
     switch(etape)
     {
-        case 0 :
+        case 0 : //enregistrement du premier point
 			main_frame->tab_tri[nbtri]=new Triangle();
             main_frame->tab_tri[nbtri]->p1.x = realX(event.GetX());
             main_frame->tab_tri[nbtri]->p1.y = realY(event.GetY());
             etape ++;
             break;
             
-        case 2 : 
+        case 2 : // enregistrement 3 point raz du reste
             main_frame->tab_tri[nbtri]->p3.x = realX(event.GetX());
             main_frame->tab_tri[nbtri]->p3.y = realY(event.GetY());
             etape = 0;
@@ -233,6 +233,7 @@ void OpenGLCanvas::OnLeftDown (wxMouseEvent& event)
 //-------------------------realX----------------------------------------
 int OpenGLCanvas::realX(int x)
 {
+	//conversion des coordonnes par rapport au repere
     int w, h;
     GetClientSize(&w, &h);
     return (x-(w/2));
@@ -240,6 +241,7 @@ int OpenGLCanvas::realX(int x)
 //---------------------------realY--------------------------------------
 int OpenGLCanvas::realY(int y)
 {
+	//conversion des coordonnes par rapport au repere
     int w, h;
     GetClientSize(&w, &h);
     return (-1*(y-h/2));
@@ -248,7 +250,13 @@ int OpenGLCanvas::realY(int y)
 void OpenGLCanvas::OnLeftUp (wxMouseEvent& event)
 {
 	CMainFrame * main_frame = (CMainFrame *)GetParent();
-	if(etape == 1)
+	
+	//verification nombre triangle et dessin active
+	if (nbtri >= 4 || !main_frame->bIsDrawing)
+    {
+        return;
+    }
+	if(etape == 1)//etape 1 avec enreg 2eme point
 	{
 		main_frame->tab_tri[main_frame->num_tri]->p2.x = realX(event.GetX());
 		main_frame->tab_tri[main_frame->num_tri]->p2.y = realY(event.GetY());

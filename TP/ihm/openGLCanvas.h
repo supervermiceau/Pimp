@@ -19,8 +19,6 @@ class OpenGLCanvas : public wxGLCanvas
     wxMenu *submenu3;
     wxMenuItem* propri;
     wxMenuItem* supprim;
-    bool clic_busy_out;
-    bool clic_busy_in;
 	int selected_tri;
     void OnPaint( wxPaintEvent& event);
     void OnSize (wxSizeEvent& event);
