@@ -247,6 +247,7 @@ int OpenGLCanvas::realY(int y)
 //-----------------OnLeftUp---------------------------------------------
 void OpenGLCanvas::OnLeftUp (wxMouseEvent& event)
 {
+	CMainFrame * main_frame = (CMainFrame *)GetParent();
 	if(etape == 1)
 	{
 		main_frame->tab_tri[nbtri]->p2.x = realX(event.GetX());
