@@ -250,8 +250,8 @@ void OpenGLCanvas::OnLeftUp (wxMouseEvent& event)
 	CMainFrame * main_frame = (CMainFrame *)GetParent();
 	if(etape == 1)
 	{
-		main_frame->tab_tri[nbtri]->p2.x = realX(event.GetX());
-		main_frame->tab_tri[nbtri]->p2.y = realY(event.GetY());
+		main_frame->tab_tri[main_frame->nbtri]->p2.x = realX(event.GetX());
+		main_frame->tab_tri[main_frame->nbtri]->p2.y = realY(event.GetY());
 		etape ++;
 	}
 	//printf(" X : %d, Y : %d \n",realX(event.GetX()), realY(event.GetY()));
