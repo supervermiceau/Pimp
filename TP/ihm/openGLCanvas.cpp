@@ -252,7 +252,7 @@ void OpenGLCanvas::OnLeftUp (wxMouseEvent& event)
 	CMainFrame * main_frame = (CMainFrame *)GetParent();
 	
 	//verification nombre triangle et dessin active
-	if (nbtri >= 4 || !main_frame->bIsDrawing)
+	if (main_frame->num_tri >= 4 || !main_frame->bIsDrawing)
     {
         return;
     }
