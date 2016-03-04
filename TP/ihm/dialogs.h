@@ -1,4 +1,3 @@
-
 #ifndef __DIALOGS_H__
 #define __DIALOGS_H__
 #include <wx/wx.h>
