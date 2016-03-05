@@ -1,29 +1,26 @@
 #include <wx/wx.h>
 #include "mainframe.h"
 #include "dialogs.h"
-
 //-----------------------MyApp------------------------------------------
 class MyApp: public wxApp 
 {
-	virtual bool OnInit();
-	CMainFrame *m_MainFrame;
+  virtual bool OnInit();
+  CMainFrame *m_MainFrame;
 };
 //----------------------------------------------------------------------
 IMPLEMENT_APP(MyApp)
 //----------------------OnInit------------------------------------------
 bool MyApp::OnInit() 
 {	
-
-	m_MainFrame = new CMainFrame( wxString("Application Triangle", wxConvUTF8), wxPoint(50,50), wxSize(900,680) );
-	m_MainFrame->Show(TRUE);
-
-	m_MainFrame->menu_bar= new wxMenuBar;
-
 	//creation objet du menu
 	wxMenu *file_menu = new wxMenu;
-	m_MainFrame->affichage = new wxMenu;
 	wxMenu *option = new wxMenu;
 	wxMenu *aide = new wxMenu;
+	
+	m_MainFrame = new CMainFrame( wxString("Application Triangle", wxConvUTF8), wxPoint(50,50), wxSize(900,680) );
+	m_MainFrame->Show(TRUE);
+	m_MainFrame->menu_bar= new wxMenuBar;
+	m_MainFrame->affichage = new wxMenu;
 	
 	//affichage dans le menu
 	m_MainFrame->menu_bar->Append(file_menu, wxT("Fichier"));
@@ -48,7 +45,6 @@ bool MyApp::OnInit()
 	aide->Append(MENU_AIDE, wxT("version\tCtrl-N"));
 	aide->Append(MENU_OUVRIR_AIDE, wxT("ouvrir l'aide"));
 
-	
 	//rubrique affichage
 	m_MainFrame->affichage->AppendCheckItem(MENU_TOOLBAR,wxT("Toolbar"));
 	m_MainFrame->affichage->Check(MENU_TOOLBAR,TRUE);
@@ -63,7 +59,6 @@ bool MyApp::OnInit()
 		return FALSE;
 	}
 	
-
 	return TRUE;
 } 
 //----------------------------------------------------------------------

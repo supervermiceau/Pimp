@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <wx/wx.h>
-#include <wx/accel.h>
-
 #include "mainframe.h"
-
 //----------------------Table evenement---------------------------------
 BEGIN_EVENT_TABLE(CMainFrame, wxFrame)
 EVT_MENU(MENU_NEW, CMainFrame::OnNew)
@@ -33,11 +27,12 @@ CMainFrame::CMainFrame(const wxString& title, const wxPoint& pos, const wxSize& 
 //----------------------------------------------------------------------
 void CMainFrame::CreateMyToolbar() 
 {
+  wxBitmap toolBarBitmaps[4];
+	
 	//creation de la barre vide ( avec certaine propriete)
 	m_toolbar=CreateToolBar(wxNO_BORDER | wxTB_HORIZONTAL | wxTB_TEXT,TOOLBAR_TOOLS);
 	
 	//Chargement des images bitmap utlisées par les boutons de la barre
-	wxBitmap toolBarBitmaps[4];
 	toolBarBitmaps[0] = wxBitmap(wxT("new.bmp"),wxBITMAP_TYPE_BMP);
 	toolBarBitmaps[1] = wxBitmap(wxT("open.bmp"),wxBITMAP_TYPE_BMP);
 	toolBarBitmaps[2] = wxBitmap(wxT("save.bmp"),wxBITMAP_TYPE_BMP);
@@ -50,6 +45,7 @@ void CMainFrame::CreateMyToolbar()
 	m_toolbar->AddTool(MENU_NEW, wxT("Nouveau"), toolBarBitmaps[0]);
 	m_toolbar->AddTool(MENU_OUVRIR, wxT("Ouvrir"), toolBarBitmaps[1]);
 	m_toolbar->AddTool(MENU_SAVE, wxT("Sauvegarder"), toolBarBitmaps[2]);
+	
 	//ajout separateur
 	m_toolbar->AddSeparator();
 	//ajout 4eme bouton via addchektool
@@ -62,10 +58,11 @@ void CMainFrame::CreateMyToolbar()
 //--------------Fonction ouvrir-----------------------------------------
 void CMainFrame::OnNew(wxCommandEvent& event)
 {
+  int iCpt = 0;
 	//suppresion du tableau de triangle
 	if(num_tri > 0)
 	{
-		for(int iCpt=num_tri-1; iCpt>=0; iCpt--)
+		for(iCpt=num_tri-1; iCpt>=0; iCpt--)
 		{
 			free(tab_tri[iCpt]);
 		}
@@ -77,29 +74,31 @@ void CMainFrame::OnNew(wxCommandEvent& event)
 void CMainFrame::OnOpen(wxCommandEvent& event)
 {
 
-	wxFileDialog openFileDialog(this, _("Ouvrir Fichier .tri file"), "", "", "Fichier tri (*.tri)|*.tri", wxFD_OPEN|wxFD_FILE_MUST_EXIST);
-    if (openFileDialog.ShowModal() == wxID_CANCEL)
-        return;     // the user changed idea...
+  wxFileDialog openFileDialog(this, _("Ouvrir Fichier .tri file"), "", "", "Fichier tri (*.tri)|*.tri", wxFD_OPEN|wxFD_FILE_MUST_EXIST);
+  int iCpt, r,g,b;
+  float t1, t2;
+  
+	if(openFileDialog.ShowModal() == wxID_CANCEL)
+		return;     //annul
     
     // proceed loading the file chosen by the user;
     // this can be done with e.g. wxWidgets input streams:
 	std::ifstream fo(openFileDialog.GetPath().fn_str(), std::ios::in);	
 	
 	// if open file failed, show an error message box
-	if (!fo)
+	if(!fo)
 	{
-		  wxString errormsg, caption;
-		  errormsg.Printf(wxT("Unable to open file "));
-		  errormsg.Append(openFileDialog.GetPath());
-		  caption.Printf(wxT("Erreur"));
-		  wxMessageDialog msg(this, errormsg, caption, wxOK | wxCENTRE | wxICON_ERROR);
-		  msg.ShowModal();
-		  return ;
+		wxString errormsg, caption;
+		errormsg.Printf(wxT("Unable to open file "));
+		errormsg.Append(openFileDialog.GetPath());
+		caption.Printf(wxT("Erreur"));
+		wxMessageDialog msg(this, errormsg, caption, wxOK | wxCENTRE | wxICON_ERROR);
+		msg.ShowModal();
+		return ;
 	}
 	
 	fo>> num_tri;
-	int iCpt, r,g,b;
-	float t1, t2;
+
 	for(iCpt=0; iCpt<num_tri; iCpt++)
 	{
 		tab_tri[iCpt]=new Triangle();
@@ -146,7 +145,6 @@ void CMainFrame::OnOpen(wxCommandEvent& event)
 		fo>>tab_tri[iCpt]->thickness;
 	}
 
-
 	if(num_tri>0)
 	{
 		menu_bar->Enable(MENU_GESTION,true);
@@ -156,15 +154,14 @@ void CMainFrame::OnOpen(wxCommandEvent& event)
 //--------------Fonction Save-------------------------------------------
 void CMainFrame::OnSave(wxCommandEvent& event)
 {
-	wxFileDialog saveFileDialog(this, _("Save tri file"), "", "","tri files (*.tri)|*.tri", wxFD_SAVE|wxFD_OVERWRITE_PROMPT);
-	if (saveFileDialog.ShowModal() == wxID_CANCEL)
-        return;    
+  wxFileDialog saveFileDialog(this, _("Save tri file"), "", "","tri files (*.tri)|*.tri", wxFD_SAVE|wxFD_OVERWRITE_PROMPT);
 	
-    
-
+	if(saveFileDialog.ShowModal() == wxID_CANCEL)
+        return;    
+        
     std::ofstream fs(saveFileDialog.GetPath().fn_str(), std::ios::out);	
 
-	if (!fs)
+	if(!fs)
 	{
 		wxString errormsg, caption;
 		errormsg.Printf(wxT("Unable to open file "));
@@ -217,23 +214,26 @@ void CMainFrame::OnQuit(wxCommandEvent& event)
 //--------------Fonction Aide-------------------------------------------
 void CMainFrame::OnAide(wxCommandEvent& event)
 {
-	//affichage boite aide
-	VersionDialog vdlg(this, -1, wxT("Aide"));
+  //affichage boite aide
+  VersionDialog vdlg(this, -1, wxT("Aide"));
+  
 	vdlg.ShowModal();
 }
 //--------------Fonction Epaisseur--------------------------------------
 void CMainFrame::OnEpaisseur(wxCommandEvent& event)
 {
-	//affichage boite
-	EpaisseurDialog edlg(this, -1, wxT("Epaisseur"));
+  //affichage boite
+  EpaisseurDialog edlg(this, -1, wxT("Epaisseur"));
+  
 	edlg.slider->SetValue(iEpaisseurTraitCourante);
 	edlg.ShowModal();
 }
 //--------------Fonction Couleur----------------------------------------
 void CMainFrame::OnCouleur(wxCommandEvent& event)
 {
-	//affichage boite
-	CouleurDialog cdlg(this, -1, wxT("Couleur"));
+  //affichage boite
+  CouleurDialog cdlg(this, -1, wxT("Couleur"));
+  
 	if(wCouleurCourante == wxRED)
 		cdlg.radio->SetSelection(0);
 	if(wCouleurCourante == wxGREEN)
@@ -246,7 +246,7 @@ void CMainFrame::OnCouleur(wxCommandEvent& event)
 //--------------Fonction Gestion----------------------------------------
 void CMainFrame::OnGest(wxCommandEvent& event)
 {
-	GestDialog gdlg(this, -1, wxT("Gestion"));
+  GestDialog gdlg(this, -1, wxT("Gestion"));
 	
 	gdlg.Rafraichir();
 	gdlg.ShowModal();

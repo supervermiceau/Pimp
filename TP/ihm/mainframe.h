@@ -5,6 +5,9 @@
 #include <fstream>
 #include <wx/filedlg.h>
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <wx/accel.h>
 #include "dialogs.h"
 #include "triangle.h"
 #include "openGLCanvas.h"
