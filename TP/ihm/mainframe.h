@@ -46,8 +46,6 @@ public:
 	void OnDraw(wxCommandEvent& event);
 	void OnToolBar(wxCommandEvent& event);
 	void SetEpaisseur(int iNewEpaisseur);
-	void SetCouleur(wxColour xwcNew);
-	void SetBool(bool bnew);
 	void Supprimer_tri(int n);
 	
 	//creation menu

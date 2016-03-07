@@ -284,15 +284,6 @@ void CMainFrame::SetEpaisseur(int iNewEpaisseur)
 {
 	iEpaisseurTraitCourante = iNewEpaisseur;
 }
-//----------------Set Couleur-------------------------------------------
-void CMainFrame::SetCouleur(wxColour xwcNew)
-{
-}
-//----------------Set Bool----------------------------------------------
-void CMainFrame::SetBool(bool bnew)
-{
-	
-}
 //----------------Supprimer_tri-----------------------------------------
 void CMainFrame::Supprimer_tri(int n)
 {

@@ -42,11 +42,11 @@ bool MyApp::OnInit()
 	option->Append(MENU_GESTION, wxT("Gestion triangle\tCtrl-N"));
 	
 	//rubrique aide
-	aide->Append(MENU_AIDE, wxT("version\tCtrl-N"));
-	aide->Append(MENU_OUVRIR_AIDE, wxT("ouvrir l'aide"));
+	aide->Append(MENU_AIDE, wxT("Version\tCtrl-N"));
+	aide->Append(MENU_OUVRIR_AIDE, wxT("Ouvrir l'aide"));
 
 	//rubrique affichage
-	m_MainFrame->affichage->AppendCheckItem(MENU_TOOLBAR,wxT("Toolbar"));
+	m_MainFrame->affichage->AppendCheckItem(MENU_TOOLBAR,wxT("Toolbar\tCtrl-B"));
 	m_MainFrame->affichage->Check(MENU_TOOLBAR,TRUE);
 	m_MainFrame->menu_bar->Enable(MENU_GESTION,false);
 	
