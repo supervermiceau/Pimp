@@ -1,4 +1,4 @@
-#------------------------------------------------------------
+#------------------------------------------------------------w
 #          Creation Gestion recette
 #------------------------------------------------------------
 
@@ -24,11 +24,11 @@ CREATE TABLE Recette(
 #------------------------------------------------------------
 
 CREATE TABLE Etape(
-        id_etape   Int NOT NULL ,
         id_Recette  Int NOT NULL ,
+        ordre int;
         descriptif Varchar (500) ,
         duree      Int ,
-        PRIMARY KEY (id_etape )
+        PRIMARY KEY (id_recette,ordre )
 );
 
 #------------------------------------------------------------
@@ -42,6 +42,7 @@ CREATE TABLE Ingredient(
         glucide       Int ,
         lipide        Int ,
         protide       Int ,
+        id_categorie int not null,
         PRIMARY KEY (id_ingredient )
 );
 
@@ -52,7 +53,6 @@ CREATE TABLE Ingredient(
 CREATE TABLE Categorie(
         id_categorie  Int NOT NULL ,
         Nom           Varchar (25) ,
-        id_ingredient Int ,
         PRIMARY KEY (id_categorie )
 );
 
@@ -187,9 +187,8 @@ ALTER TABLE Recette ADD CONSTRAINT CK_Recette_difficulte check (difficulte in ('
 ALTER TABLE Recette ADD CONSTRAINT CK_Recette_prix check (prix in ('1', '2', '3', '4', '5')); 
 ALTER TABLE Recette ADD CONSTRAINT FK_Recette_id_utilisateur FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur);
 
-ALTER TABLE Categorie ADD CONSTRAINT FK_Categorie_id_ingredient FOREIGN KEY (id_ingredient) REFERENCES Ingredient(id_ingredient);
 ALTER TABLE etape ADD CONSTRAINT FK_etape_id_Recette FOREIGN KEY (id_Recette) REFERENCES Recette(id_Recette);
-
+ALTER TABLE ingredient ADD CONSTRAINT FK_ingredient_id_categorie FOREIGN KEY (id_categorie) REFERENCES categorie(id_categorie);
 ALTER TABLE utilisateur ADD CONSTRAINT FK_utilisateur_Login FOREIGN KEY (Login) REFERENCES Login(Login);
 ALTER TABLE utilisateur ADD CONSTRAINT FK_utilisateur_id_planning FOREIGN KEY (id_planning) REFERENCES Planning(id_planning);
 ALTER TABLE utilisateur ADD CONSTRAINT FK_utilisateur_id_Recette FOREIGN KEY (id_Recette) REFERENCES Recette(id_Recette);
