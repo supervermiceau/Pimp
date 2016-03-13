@@ -2,7 +2,6 @@
 #          Creation Gestion recette
 #------------------------------------------------------------
 
-
 #------------------------------------------------------------
 # Table: Recette
 #------------------------------------------------------------
@@ -20,7 +19,6 @@ CREATE TABLE Recette(
         PRIMARY KEY (id_Recette )
 );
 
-
 #------------------------------------------------------------
 # Table: Etape
 #------------------------------------------------------------
@@ -31,7 +29,6 @@ CREATE TABLE Etape(
         duree      Int ,
         PRIMARY KEY (id_etape )
 );
-
 
 #------------------------------------------------------------
 # Table: Ingredient
@@ -47,7 +44,6 @@ CREATE TABLE Ingredient(
         PRIMARY KEY (id_ingredient )
 );
 
-
 #------------------------------------------------------------
 # Table: Categorie
 #------------------------------------------------------------
@@ -59,7 +55,6 @@ CREATE TABLE Categorie(
         PRIMARY KEY (id_categorie )
 );
 
-
 #------------------------------------------------------------
 # Table: Regime
 #------------------------------------------------------------
@@ -69,7 +64,6 @@ CREATE TABLE Regime(
         nom_regime Varchar (25) ,
         PRIMARY KEY (id_regime )
 );
-
 
 #------------------------------------------------------------
 # Table: utilisateur
@@ -86,7 +80,6 @@ CREATE TABLE utilisateur(
         PRIMARY KEY (id_utilisateur )
 );
 
-
 #------------------------------------------------------------
 # Table: Login
 #------------------------------------------------------------
@@ -97,7 +90,6 @@ CREATE TABLE Login(
         PRIMARY KEY (Login )
 );
 
-
 #------------------------------------------------------------
 # Table: Planning
 #------------------------------------------------------------
@@ -107,7 +99,6 @@ CREATE TABLE Planning(
         nom         Varchar (25) ,
         PRIMARY KEY (id_planning )
 );
-
 
 #------------------------------------------------------------
 # Table: Archive planning
@@ -122,7 +113,6 @@ CREATE TABLE Archive_planning(
         PRIMARY KEY (id_planning )
 );
 
-
 #------------------------------------------------------------
 # Table: Archives liste achat
 #------------------------------------------------------------
@@ -132,7 +122,6 @@ CREATE TABLE Archives_liste_achat(
         id_Recette  Int NOT NULL ,
         PRIMARY KEY (id_planning ,id_Recette )
 );
-
 
 #------------------------------------------------------------
 # Table: Composer
@@ -146,7 +135,6 @@ CREATE TABLE Composer(
         PRIMARY KEY (id_Recette ,id_ingredient )
 );
 
-
 #------------------------------------------------------------
 # Table: Est interdit
 #------------------------------------------------------------
@@ -156,7 +144,6 @@ CREATE TABLE Est_interdit(
         id_regime     Int NOT NULL ,
         PRIMARY KEY (id_ingredient ,id_regime )
 );
-
 
 #------------------------------------------------------------
 # Table: Possede
@@ -170,7 +157,6 @@ CREATE TABLE Possede(
         PRIMARY KEY (id_utilisateur ,id_ingredient )
 );
 
-
 #------------------------------------------------------------
 # Table: Creer liste
 #------------------------------------------------------------
@@ -182,7 +168,6 @@ CREATE TABLE Creer_liste(
         id_planning Int NOT NULL ,
         PRIMARY KEY (id_Recette ,id_planning )
 );
-
 
 #------------------------------------------------------------
 # Table: convient à
@@ -199,7 +184,7 @@ CREATE TABLE convient_a(
 #------------------------------------------------------------
 
 ALTER TABLE Recette ADD CONSTRAINT FK_Recette_id_etape FOREIGN KEY (id_etape) REFERENCES Etape(id_etape);
-ALTER TABLE Recette ADD CONSTRAINT CK_Recette_difficulte check (difficulte in ('1', '2', '3', '4', '5')); 
+ALTER TABLE Recette ADD CONSTRAINT CK_Recette_difficulte check (difficulte in ('Tres facile', 'Facile', 'Moyen', 'Difficile', 'Tres difficile')); 
 ALTER TABLE Recette ADD CONSTRAINT CK_Recette_prix check (prix in ('1', '2', '3', '4', '5')); 
 
 ALTER TABLE Categorie ADD CONSTRAINT FK_Categorie_id_ingredient FOREIGN KEY (id_ingredient) REFERENCES Ingredient(id_ingredient);
