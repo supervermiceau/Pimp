@@ -15,7 +15,7 @@ CREATE TABLE Recette(
         videos      Varchar (25) ,
         prix        Int ,
         duree       Int ,
-        id_etape    Int ,
+        id_utilisateur Int NOT NULL,
         PRIMARY KEY (id_Recette )
 );
 
@@ -25,6 +25,7 @@ CREATE TABLE Recette(
 
 CREATE TABLE Etape(
         id_etape   Int NOT NULL ,
+        id_Recette  Int NOT NULL ,
         descriptif Varchar (500) ,
         duree      Int ,
         PRIMARY KEY (id_etape )
@@ -75,8 +76,6 @@ CREATE TABLE utilisateur(
         Prenom         Varchar (20) ,
         email          Varchar (30) ,
         Login          Varchar (25) ,
-        id_planning    Int ,
-        id_Recette     Int ,
         PRIMARY KEY (id_utilisateur )
 );
 
@@ -97,6 +96,7 @@ CREATE TABLE Login(
 CREATE TABLE Planning(
         id_planning Int NOT NULL ,
         nom         Varchar (25) ,
+        id_utilisateur Int NOT NULL,
         PRIMARY KEY (id_planning )
 );
 
@@ -183,22 +183,20 @@ CREATE TABLE convient_a(
 #        Contrainte
 #------------------------------------------------------------
 
-ALTER TABLE Recette ADD CONSTRAINT FK_Recette_id_etape FOREIGN KEY (id_etape) REFERENCES Etape(id_etape);
 ALTER TABLE Recette ADD CONSTRAINT CK_Recette_difficulte check (difficulte in ('Tres facile', 'Facile', 'Moyen', 'Difficile', 'Tres difficile')); 
 ALTER TABLE Recette ADD CONSTRAINT CK_Recette_prix check (prix in ('1', '2', '3', '4', '5')); 
+ALTER TABLE Recette ADD CONSTRAINT FK_Recette_id_utilisateur FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur);
 
 ALTER TABLE Categorie ADD CONSTRAINT FK_Categorie_id_ingredient FOREIGN KEY (id_ingredient) REFERENCES Ingredient(id_ingredient);
+ALTER TABLE etape ADD CONSTRAINT FK_etape_id_Recette FOREIGN KEY (id_Recette) REFERENCES Recette(id_Recette);
 
 ALTER TABLE utilisateur ADD CONSTRAINT FK_utilisateur_Login FOREIGN KEY (Login) REFERENCES Login(Login);
 ALTER TABLE utilisateur ADD CONSTRAINT FK_utilisateur_id_planning FOREIGN KEY (id_planning) REFERENCES Planning(id_planning);
 ALTER TABLE utilisateur ADD CONSTRAINT FK_utilisateur_id_Recette FOREIGN KEY (id_Recette) REFERENCES Recette(id_Recette);
 
-ALTER TABLE Login ADD CONSTRAINT FK_Login_id_utilisateur FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur);
-
 ALTER TABLE Composer ADD CONSTRAINT FK_Composer_id_Recette FOREIGN KEY (id_Recette) REFERENCES Recette(id_Recette);
 ALTER TABLE Composer ADD CONSTRAINT FK_Composer_id_ingredient FOREIGN KEY (id_ingredient) REFERENCES Ingredient(id_ingredient);
 ALTER TABLE Composer ADD CONSTRAINT CK_Composer_unite check (unite in ('U', 'g')); 
-
 
 ALTER TABLE Est_interdit ADD CONSTRAINT FK_Est_interdit_id_ingredient FOREIGN KEY (id_ingredient) REFERENCES Ingredient(id_ingredient);
 ALTER TABLE Est_interdit ADD CONSTRAINT FK_Est_interdit_id_regime FOREIGN KEY (id_regime) REFERENCES Regime(id_regime);
@@ -214,3 +212,6 @@ ALTER TABLE Creer_liste ADD CONSTRAINT CK_Creer_liste_repas check (repas in ('Pe
 
 ALTER TABLE convient_a ADD CONSTRAINT FK_convient_a_id_regime FOREIGN KEY (id_regime) REFERENCES Regime(id_regime);
 ALTER TABLE convient_a ADD CONSTRAINT FK_convient_a_id_Recette FOREIGN KEY (id_Recette) REFERENCES Recette(id_Recette);
+
+ALTER TABLE Planning ADD CONSTRAINT FK_Planning_id_utilisateur FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur);
+
