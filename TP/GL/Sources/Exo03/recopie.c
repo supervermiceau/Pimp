@@ -36,6 +36,7 @@ int main()
   else
     fprintf(stdout,"Le fichier3 a bien été ouvert\n\n");
 	
+	taille = 100;
      
   /* Allocation du buffer utilisé pour la recopie */
   lecture = (char *) malloc(taille*sizeof(char));
@@ -43,7 +44,7 @@ int main()
   /* On commence par recopier le premier fichier */
   while(fgets(lecture,taille,f)!=NULL)
 	{
-		printf(" f : %s \n",lecture);
+	printf(" f : %s \n",lecture);
     fputs(lecture,h);
 	}
 
