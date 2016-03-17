@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 	int iTmp=atoi(argv[1]);
 	printf("%d jj\n",iTmp);
 
-	iTmp= (iTmp-32);
+	iTmp= (5/9)*(iTmp-32);
 printf("%d jj\n",iTmp);
   fprintf(stderr,"%d degrés Farenheit correspondent à %d degrés Celsius\n",
 	  atoi(argv[1]),iTmp);
