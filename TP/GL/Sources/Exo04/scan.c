@@ -14,7 +14,6 @@ int main()
   for(index = 0; index<taille; index++)
   {
       tableau[2*index] = index;
-      printf(" %d %d \n",index, taille);
 	}
   return 0;
 }

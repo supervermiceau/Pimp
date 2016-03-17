@@ -16,5 +16,6 @@ int main()
 	    for(n=10; n>0; n--)
 	      compteur++;
 
+printf("%d \n",compteur);
   return 0;
 }
