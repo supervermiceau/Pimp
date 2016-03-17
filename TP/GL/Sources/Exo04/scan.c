@@ -7,10 +7,10 @@
 
 int main()
 {
-  char index;
+  int index;
   char * tableau;
   double taille = exp(MAXNUM);  
-  tableau = malloc (4*taille*sizeof(char));
+  tableau = (char*) malloc (4*taille*sizeof(char));
   for(index = 0; index<taille; index++)
       tableau[2*index] = index;
 
