@@ -42,7 +42,10 @@ int main()
 
   /* On commence par recopier le premier fichier */
   while(fgets(lecture,taille,f)!=NULL)
+	{
+		printf(" f : %s \n",lecture);
     fputs(lecture,h);
+	}
 
   /* Puis le deuxieme */
   while(fgets(lecture,taille,g)!=NULL)
