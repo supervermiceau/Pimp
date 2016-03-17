@@ -8,7 +8,7 @@ int main(int argc, char **argv)
     fprintf(stderr,"Cette fonction prend en entrée un entier (la température en degré Farenheit)\n");
     exit(1);
   }
-	iTmp=atoi(argv[1]);
+	int iTmp=atoi(argv[1]);
 	printf("%d jj\n",iTmp);
 
 	iTmp= 5/9*(iTmp-32);
