@@ -13,7 +13,7 @@ int main()
     valeurs[i] = i*i;
   
   for(j=0; j<200; j++)
-    indices[i] = 199-j;
+    indices[j] = 199-j;
     
   for(i=0; i<200; i++)
     fprintf(f,"%d\t",valeurs[indices[i]]);
