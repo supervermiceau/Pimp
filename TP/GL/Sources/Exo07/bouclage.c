@@ -11,8 +11,8 @@ int main()
   for(i=0; i<10;i++)
     {
       j = (j-i)*(j+i) + i + 1; 
-      if (((j>27)&&(i<3))||((i>4)&&(i=j)&&(j<32)))
-	fprintf(stderr,"%d\t",j);
+      if (((j>27)&&(i<3))||((i>4)&&(i==j)&&(j<32)))
+		fprintf(stderr,"%d\t",j);
     }
 
   return 0;
