@@ -5,10 +5,10 @@
 
 int * calculeresultat(int * donnees, int taille)
 {
-  int tableau[3];
+  int *tableau;
   int * machin;
   int i;
-
+	tableau = malloc(3*sizeof(int));
   tableau[1] = 27;
   for(i=0; i<taille; i++)
     tableau[1] = (1-tableau[1])*donnees[i];
