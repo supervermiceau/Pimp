@@ -6,7 +6,7 @@ int main()
 {
   FILE * f = fopen("fichier1","r");
   FILE * g = fopen("fichier2","r");
-  FILE * h = fopen("fichier3","r");
+  FILE * h = fopen("fichier3","w");
   char * lecture;
   int taille;
 
