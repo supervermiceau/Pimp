@@ -9,8 +9,10 @@ int main(int argc, char **argv)
     exit(1);
   }
 
+	int iTmp=5/9*(atoi(argv[1])-32);
+
   fprintf(stderr,"%d degrés Farenheit correspondent à %d degrés Celsius\n",
-	  atoi(argv[1]), 5/9*(atoi(argv[1])-32));
+	  atoi(argv[1]),iTmp);
 
   return 0;
 }
