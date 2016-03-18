@@ -5,4 +5,4 @@ QT += core \
 HEADERS += Mainwin.h
 SOURCES += Mainwin.cpp \
 	main.cpp
-FORMS += TP.ui
+FORMS += mwin
