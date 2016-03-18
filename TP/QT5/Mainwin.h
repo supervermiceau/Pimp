@@ -11,7 +11,7 @@ class Qonvertisseur : public QMainWindow, private Ui::MainWindow
 	public :
 		Qonvertisseur(QWidget *parent = 0 );
 		~Qonvertisseur();
-		Bool QObject::
+		bool QObject::
 		private:
 };
 //----------------------------------------------------------------------
