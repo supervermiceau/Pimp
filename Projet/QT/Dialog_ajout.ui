@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>492</width>
-    <height>459</height>
+    <width>308</width>
+    <height>560</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,28 +18,11 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>471</width>
-     <height>441</height>
+     <width>281</width>
+     <height>521</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QGroupBox" name="groupBox_2">
-      <property name="title">
-       <string>Description</string>
-      </property>
-      <widget class="QTextEdit" name="textEdit_2">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>20</y>
-         <width>261</width>
-         <height>121</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
-    </item>
     <item>
      <widget class="QGroupBox" name="groupBox">
       <property name="title">
@@ -49,9 +32,9 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>10</y>
+         <y>21</y>
          <width>261</width>
-         <height>131</height>
+         <height>147</height>
         </rect>
        </property>
        <layout class="QFormLayout" name="formLayout">
@@ -66,13 +49,6 @@
          <widget class="QLabel" name="label_2">
           <property name="text">
            <string>Surface :</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string>Nombre de piece :</string>
           </property>
          </widget>
         </item>
@@ -95,8 +71,34 @@
         <item row="5" column="1">
          <widget class="QLineEdit" name="lineEdit_2"/>
         </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Nombre de piece :</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="title">
+       <string>Description</string>
+      </property>
+      <widget class="QTextEdit" name="textEdit_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>261</width>
+         <height>121</height>
+        </rect>
+       </property>
+      </widget>
+      <zorder>textEdit_2</zorder>
+      <zorder>groupBox</zorder>
      </widget>
     </item>
     <item>
@@ -121,8 +123,6 @@
     </item>
    </layout>
   </widget>
-  <zorder>verticalLayoutWidget</zorder>
-  <zorder>buttonBox</zorder>
  </widget>
  <resources/>
  <connections>
@@ -133,27 +133,11 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>249</x>
+     <y>529</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
      <y>274</y>
     </hint>
    </hints>
