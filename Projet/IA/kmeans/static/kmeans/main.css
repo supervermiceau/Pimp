@@ -1,0 +1,133 @@
+html {
+	box-sizing: border-box;
+	margin:0;
+	padding:0;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body{
+	background-color: #eee;
+	padding:32px;
+	margin:0;
+	font-family: sans-serif;
+}
+
+section{
+	width:800px;
+	background-color: #fff;
+	margin: 0 auto;
+	padding:32px;
+	border-radius: 2px;
+	box-shadow: 0px -2px 0px #aaa inset;
+	overflow: auto;
+}
+
+section > div#cont{
+	text-align: center;
+}
+
+section > form > div {
+	overflow: auto;
+	padding: 8px
+}
+
+section > form > div > div {
+	float:left;
+	padding:8px 4px 10px;
+	margin-bottom: 4px
+}
+
+section span{
+	display: inline-block;
+	margin:8px 0;
+}
+
+input, select{
+	padding:8px;
+	background-color: #eee;
+	border:none;
+	border-radius: 2px;
+	box-shadow: 0px 2px 0px #bbb inset;
+}
+
+select{
+	width:49%;
+}
+
+h2,h3{
+	margin: 0;
+	line-height: 1.2em;
+	text-align: center;
+}
+
+h3{
+	margin-bottom: 16px;
+}
+
+input[type="number"]{
+	width:32%;
+	margin-bottom: 8px;
+}
+
+input[type="checkbox"]:not(:checked), input[type="checkbox"]:checked {
+	position: absolute;
+	left: -9999px;
+}
+
+input[type="checkbox"]:not(:checked) + label, input[type="checkbox"]:checked + label {
+	position: relative;
+	cursor: pointer;
+	padding:8px;
+	padding-bottom: 10px;
+	padding-left: 32px;
+	background-color: #FF4136;
+	border-radius: 2px;
+	box-shadow: 0px -2px 0px #85144b inset;
+}
+
+input[type="checkbox"]:checked + label{
+	background-color: #2ECC40;
+	box-shadow: 0px -2px 0px #3D9970 inset;
+	position: relative;
+}
+
+input[type="checkbox"]:checked + label:after{
+	position: absolute;
+	top:4px;
+	left:4px;
+	content: url(yes.png)
+}
+
+input[type="checkbox"]:not(:checked) + label:after{
+	position: absolute;
+	top:6px;
+	left:4px;
+	content: url(no.png)
+}
+
+input[type="submit"]{
+	box-shadow: 0px -2px 0px #bbb inset;
+	cursor: pointer;
+	font-size: 1.4em;
+	float:right;
+}
+
+#cont2{
+	width:500px;
+	margin: 0 auto;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}

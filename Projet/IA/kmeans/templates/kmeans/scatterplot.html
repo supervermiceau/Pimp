@@ -1,0 +1,162 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Résultats de l'Analyse</title>
+        <script src="{% static 'kmeans/d3.min.js' %}" charset="utf-8"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'kmeans/main.css' %}">
+    </head>
+    <body>
+        <section>
+            <h2>Résultats</h2>
+            <div id="cont"></div>
+        	<div id="cont2"><select id="axis1" onchange="redrawCluster()">
+                {% for i in data.0.0 %}
+                <option value="{{forloop.counter}}">{{forloop.counter}}</option>
+                {% endfor %}
+            </select>
+            <select id="axis2" onchange="redrawCluster()">
+                {% for i in data.0.0 %}
+                <option value="{{forloop.counter}}">{{forloop.counter}}</option>
+                {% endfor %}
+            </select></div>
+            <select id="clusterId" onchange="redrawCluster()">
+                <option value="0" selected>Tous les Clusters</option>
+                {% for i in data %}
+                <option value="{{forloop.counter}}">cluster {{forloop.counter}}</option>
+                {% endfor %}
+            </select>
+        </section>
+        <script type="text/javascript">
+            // Your beautiful D3 code will go here
+            var data=[
+                {% for cluster in data %}
+                {% for tuple in cluster %}
+                [{% for value in tuple %}{{value}},{% endfor %}],
+                {% endfor %}
+                {% endfor %}
+            ];
+            var axeX = 7;
+            var axeY = 8;
+            var xpadding = 40;
+            var ypadding = 30
+            var width = 700;
+            var height = 700;
+
+            generateD3()
+
+            function redraw(){
+                var svg = document.getElementById("svg");
+                svg.parentNode.removeChild(svg);
+
+                axeX = document.getElementById("axis1").selectedIndex;
+                axeY = document.getElementById("axis2").selectedIndex;
+                
+                generateD3()
+            }
+            function redrawCluster(){
+                var svg = document.getElementById("svg");
+                svg.parentNode.removeChild(svg);
+
+                axeX = document.getElementById("axis1").selectedIndex;
+                axeY = document.getElementById("axis2").selectedIndex;
+
+                var i = document.getElementById("clusterId").selectedIndex;
+                
+                if(i==0) generateD3();
+                else generateCluster(i-1);
+            }
+
+            function generateD3(){
+                var x = d3.scale.linear().range([xpadding, width - xpadding]);
+                x.domain(d3.extent(data, function(d) { return d[axeX]; })).nice();
+                
+                var y = d3.scale.linear().range([height - ypadding, ypadding]);
+                y.domain(d3.extent(data, function(d) { return d[axeY]; })).nice();
+
+
+                var color = d3.scale.category10();
+                var svg = d3.select("body").select("section").select("div").append("svg")
+                    .attr("id","svg")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .attr("shape-rendering","optimizeSpeed");
+
+                var xAxis = d3.svg.axis().scale(x).orient("bottom");
+                var yAxis = d3.svg.axis().scale(y).orient("left");
+                svg.append("g")
+                    .attr("class", "axis")
+                    .attr("transform", "translate(0," + (height - ypadding) + ")")
+                    .call(xAxis);
+                svg.append("g")
+                    .attr("class", "axis")
+                    .attr("transform", "translate(" + (xpadding) + ", 0)")
+                    .call(yAxis);
+
+                var dist = 3;
+                var gs = svg.selectAll("polyline").data(data).enter();
+
+                gs.append("polyline")
+                  .attr("points",function(d){
+                    return (x(d[axeX])-dist)+","+y(d[axeY])+" "+
+                           (x(d[axeX])+dist)+","+y(d[axeY])+" "+
+                           (x(d[axeX]))+","+y(d[axeY])+" "+
+                           (x(d[axeX]))+","+(y(d[axeY])-dist)+" "+
+                           (x(d[axeX]))+","+(y(d[axeY])+dist);
+                  })
+                  .attr("stroke",function(d){return color(d[0]);})
+                  .attr("fill","transparent");
+            }
+
+            function generateCluster(i){
+
+                var x = d3.scale.linear().range([xpadding, width - xpadding]);
+                x.domain(d3.extent(data, function(d) { return d[axeX]; })).nice();
+                
+                var y = d3.scale.linear().range([height - ypadding, ypadding]);
+                y.domain(d3.extent(data, function(d) { return d[axeY]; })).nice();
+
+
+                var color = d3.scale.category10();
+                var svg = d3.select("body").select("section").select("div").append("svg")
+                    .attr("id","svg")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .attr("shape-rendering","optimizeSpeed");
+
+                var xAxis = d3.svg.axis().scale(x).orient("bottom");
+                var yAxis = d3.svg.axis().scale(y).orient("left");
+                svg.append("g")
+                    .attr("class", "axis")
+                    .attr("transform", "translate(0," + (height - ypadding) + ")")
+                    .call(xAxis);
+                svg.append("g")
+                    .attr("class", "axis")
+                    .attr("transform", "translate(" + (xpadding) + ", 0)")
+                    .call(yAxis);
+
+                var dist = 3;
+                var gs = svg.selectAll("polyline").data(data).enter();
+
+                gs.append("polyline")
+                  .attr("points",function(d){
+                    return (x(d[axeX])-dist)+","+y(d[axeY])+" "+
+                           (x(d[axeX])+dist)+","+y(d[axeY])+" "+
+                           (x(d[axeX]))+","+y(d[axeY])+" "+
+                           (x(d[axeX]))+","+(y(d[axeY])-dist)+" "+
+                           (x(d[axeX]))+","+(y(d[axeY])+dist);
+                  })
+                  .attr("stroke",function(d){
+                    var color;
+                    if(d[0]!=i)
+                        return "lightGrey";
+                    if(d[d.length-1])
+                        return "red";
+                    return "black";
+                  })
+                  .attr("fill","transparent");
+            }
+        </script>
+    </body>
+</html>

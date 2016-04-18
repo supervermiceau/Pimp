@@ -1,0 +1,32 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Détection d'anomalies, logs informatiques</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'kmeans/main.css' %}">
+    </head>
+    <body>
+        <section>
+            <h2>Détection de spams</h2>
+            <h3>dans des logs informatiques</h3>
+        	<form action="{% url 'scatterplot' %}" method="post">
+        	{% csrf_token %}
+            <span>Paramètres :</span><br>
+        			<input type="number" min="0" max="100" name="k" placeholder="Classes de comportement">
+        			<input type="number" min="0" max="100" name="n" placeholder="Pourcentage en marge">
+        			<input type="number" min="0" max="100" name="p" placeholder=" % d'observation à afficher">
+            <br>
+            <span>Choix des Champs pris en compte (58 champs max) :</span>
+            <div>
+        	{% for i in columns %}
+        		<div><input type="checkbox" value="{{ i.0 }}" id="c{{ i.0 }}" name="columns[]" {% if i.2 %} checked {% endif %}><label for="c{{ i.0 }}">{{ i.1 }}</label></div>
+        	{% endfor %}
+            </div>
+        		<input type="submit" value="Calculer">
+        	</form>
+        </section>
+        <script type="text/javascript">
+        </script>
+    </body>
+</html>
